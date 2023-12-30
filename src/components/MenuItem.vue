@@ -34,6 +34,7 @@
 export default {
   setup(_, context) {
     const callParentMethod = () => {
+      //呼叫父層(HeaderItem)的closeMenu
       context.emit("closeMenu");
     };
 

@@ -6,27 +6,6 @@
       >{{ icon }}</i
     >
   </button>
-  <!-- <section
-    v-if="!isFirstLoad"
-    :class="{
-      'expand-animation': isOpened && !isFirstLoad,
-      'close-animation': !isOpened && !isFirstLoad,
-    }"
-  >
-    <div class="header-left"></div>
-    <div class="header-right">
-      <div class="top">
-        <div class="logo">
-          <p>FLOATING FANTASY</p>
-          <p>FLOATING FANTASY</p>
-          <p>- Eastern Gouache art of Lee Chen-huei -</p>
-        </div>
-      </div>
-      <div class="bottom">
-        <menu-item></menu-item>
-        </div>
-    </div>
-  </section> -->
   <section
     v-if="!isFirstLoad"
     :class="{
@@ -47,6 +26,7 @@
         </div>
       </div>
       <div class="bottom">
+        <!-- 呼叫closeMenu -->
         <menu-item @closeMenu="closeMenu"></menu-item>
       </div>
     </div>
@@ -66,6 +46,7 @@ export default {
     const isAnimating = ref(false);
     const isFirstLoad = ref(true);
 
+    //click menu icon && setting menu animation
     const clickMenu = () => {
       if (isOpened.value) {
         icon.value = "menu";
@@ -80,13 +61,15 @@ export default {
       }, 2000);
     };
 
+    //for App.vue
     const closeMenu = () => {
       icon.value = "menu";
-      isAnimating.value = true;
+      isFirstLoad.value = false;
       isOpened.value = false;
       setTimeout(() => {
         isAnimating.value = false;
-      }, 2000);
+      }, 10);
+      console.log('close menu')
     };
 
     return {

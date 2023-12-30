@@ -24,13 +24,20 @@
 
 <script>
 import BannerItem from "./BannerItem.vue";
-
+import { inject } from "vue";
 export default {
   name: "HomePage",
   components: {
     BannerItem,
   },
-  setup() {},
+  setup() {
+    //取得App.vue的closeMenu
+    const closeMenu = inject('closeMenu');
+
+    return {
+      closeMenu
+    };
+  },
 };
 </script>
 
