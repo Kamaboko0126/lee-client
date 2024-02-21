@@ -1,3 +1,19 @@
+<script>
+import BannerItem from "./BannerItem.vue";
+import {  } from "vue";
+export default {
+  name: "HomePage",
+  components: {
+    BannerItem,
+  },
+  setup() {
+    //取得App.vue的closeMenu
+
+    return {};
+  },
+};
+</script>
+
 <template>
   <banner-item></banner-item>
   <section>
@@ -21,25 +37,6 @@
     </div>
   </section>
 </template>
-
-<script>
-import BannerItem from "./BannerItem.vue";
-import { inject } from "vue";
-export default {
-  name: "HomePage",
-  components: {
-    BannerItem,
-  },
-  setup() {
-    //取得App.vue的closeMenu
-    const closeMenu = inject('closeMenu');
-
-    return {
-      closeMenu
-    };
-  },
-};
-</script>
 
 <style scoped>
 .section-content {

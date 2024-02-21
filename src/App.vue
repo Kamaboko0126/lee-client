@@ -1,17 +1,9 @@
-<template>
-  <loader-item v-show="isLoading"></loader-item>
-  <header-item ref="headerItemRef"></header-item>
-  <left-item></left-item>
-  <router-view />
-  <footer-item></footer-item>
-</template>
-
 <script>
-import { ref, onMounted, provide } from "vue";
-import HeaderItem from "./components/HeaderItem.vue";
-import FooterItem from "./components/FooterItem.vue";
-import LeftItem from "./components/LeftItem.vue";
-import LoaderItem from "./components/LoaderItem.vue";
+import { ref, provide } from "vue";
+import HeaderItem from "./components/DefaultItem/HeaderItem.vue";
+import FooterItem from "./components/DefaultItem/FooterItem.vue";
+import LeftItem from "./components/DefaultItem/LeftItem.vue";
+import LoaderItem from "./components/DefaultItem/LoaderItem.vue";
 export default {
   name: "App",
   components: {
@@ -21,32 +13,23 @@ export default {
     LoaderItem,
   },
   setup() {
-    const headerItemRef = ref(null);
-    const isLoading = ref(true)
-
-    onMounted(() => {
-      provide("closeMenu", headerItemRef.value.closeMenu);
-
-      //等websocket載入完成後執行closeMenu
-      const ws = new WebSocket("ws://localhost:8080/ws");
-      ws.onopen = () => {
-        isLoading.value = false;
-        console.log('ws done')
-        headerItemRef.value.closeMenu();
-      };
-      ws.onerror = (error) => {
-        console.log(`WebSocket error: ${error}`);
-        isLoading.value = false;
-      };
-    });
+    const isLoading = ref(false);
+    provide("isLoading", isLoading);
 
     return {
-      headerItemRef,
       isLoading,
     };
   },
 };
 </script>
+
+<template>
+  <loader-item v-if="isLoading"></loader-item>
+  <header-item></header-item>
+  <left-item></left-item>
+  <router-view />
+  <footer-item></footer-item>
+</template>
 
 <style>
 * {

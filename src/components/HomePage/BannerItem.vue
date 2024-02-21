@@ -1,3 +1,11 @@
+<script>
+export default {
+  setup() {
+    
+  },
+}
+</script>
+
 <template>
   <section class="float">
     <div class="section-content float-content">
@@ -39,12 +47,6 @@
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  setup() {},
-};
-</script>
 
 <style scoped>
 .float {

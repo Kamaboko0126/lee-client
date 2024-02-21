@@ -1,3 +1,61 @@
+<script>
+import { inject, ref, watch } from "vue";
+import MenuItem from "./MenuItem.vue";
+export default {
+  components: {
+    MenuItem,
+  },
+  setup() {
+    const icon = ref("menu");
+    const isOpened = ref(false);
+    const isAnimating = ref(false);
+    const isFirstLoad = ref(true);
+    const isLoading = inject("isLoading");
+
+    watch(isLoading, (val) => {
+      if (!val) {
+        clickMenu();
+      }
+    });
+
+    //click menu icon && setting menu animation
+    const clickMenu = () => {
+      if (isOpened.value) {
+        icon.value = "menu";
+      } else {
+        icon.value = "close";
+      }
+      isAnimating.value = true;
+      isFirstLoad.value = false;
+      isOpened.value = !isOpened.value;
+      setTimeout(() => {
+        isAnimating.value = false;
+      }, 2000);
+    };
+
+    //for App.vue
+    const closeMenu = () => {
+      icon.value = "menu";
+      isFirstLoad.value = false;
+      isOpened.value = false;
+      setTimeout(() => {
+        isAnimating.value = false;
+      }, 10);
+      console.log("close menu");
+    };
+
+    return {
+      icon,
+      clickMenu,
+      isOpened,
+      isAnimating,
+      isFirstLoad,
+      closeMenu,
+    };
+  },
+};
+</script>
+
 <template>
   <button :disabled="isAnimating" @click="clickMenu">
     <i
@@ -32,57 +90,6 @@
     </div>
   </section>
 </template>
-
-<script>
-import { ref } from "vue";
-import MenuItem from "./MenuItem.vue";
-export default {
-  components: {
-    MenuItem,
-  },
-  setup() {
-    const icon = ref("menu");
-    const isOpened = ref(false);
-    const isAnimating = ref(false);
-    const isFirstLoad = ref(true);
-
-    //click menu icon && setting menu animation
-    const clickMenu = () => {
-      if (isOpened.value) {
-        icon.value = "menu";
-      } else {
-        icon.value = "close";
-      }
-      isAnimating.value = true;
-      isFirstLoad.value = false;
-      isOpened.value = !isOpened.value;
-      setTimeout(() => {
-        isAnimating.value = false;
-      }, 2000);
-    };
-
-    //for App.vue
-    const closeMenu = () => {
-      icon.value = "menu";
-      isFirstLoad.value = false;
-      isOpened.value = false;
-      setTimeout(() => {
-        isAnimating.value = false;
-      }, 10);
-      console.log('close menu')
-    };
-
-    return {
-      icon,
-      clickMenu,
-      isOpened,
-      isAnimating,
-      isFirstLoad,
-      closeMenu,
-    };
-  },
-};
-</script>
 
 <style scoped>
 @keyframes expand {
