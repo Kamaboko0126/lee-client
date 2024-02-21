@@ -1,20 +1,25 @@
 <script>
 import { ref, provide } from "vue";
-import HeaderItem from "./components/DefaultItem/HeaderItem.vue";
+import MenuItem from "./components/DefaultItem/MenuItem.vue";
 import FooterItem from "./components/DefaultItem/FooterItem.vue";
 import LeftItem from "./components/DefaultItem/LeftItem.vue";
 import LoaderItem from "./components/DefaultItem/LoaderItem.vue";
 export default {
   name: "App",
   components: {
-    HeaderItem,
+    MenuItem,
     FooterItem,
     LeftItem,
     LoaderItem,
   },
   setup() {
+    //for all pages
     const isLoading = ref(false);
     provide("isLoading", isLoading);
+
+    //for all pages
+    const isMenuOpen = ref(false);
+    provide("isMenuOpen", isMenuOpen);
 
     return {
       isLoading,
@@ -24,11 +29,11 @@ export default {
 </script>
 
 <template>
-  <loader-item v-if="isLoading"></loader-item>
-  <header-item></header-item>
-  <left-item></left-item>
+  <LoaderItem v-if="isLoading" />
+  <MenuItem />
+  <LeftItem />
   <router-view />
-  <footer-item></footer-item>
+  <FooterItem />
 </template>
 
 <style>

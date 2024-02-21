@@ -1,9 +1,7 @@
 <script>
 export default {
-  setup() {
-    
-  },
-}
+  setup() {},
+};
 </script>
 
 <template>
@@ -29,18 +27,9 @@ export default {
         <div class="images">
           <img
             class="marquee-content"
+            v-for="n in 3"
+            :key="n"
             :src="require('@/assets/banner.jpg')"
-            alt=""
-          />
-          <img
-            class="marquee-content"
-            :src="require('@/assets/remake.jpg')"
-            alt=""
-          />
-          <img
-            class="marquee-content"
-            :src="require('@/assets/banner.jpg')"
-            alt=""
           />
         </div>
       </div>
@@ -124,8 +113,13 @@ export default {
   animation: marquee 280s linear infinite;
 }
 
-img {
+.images img {
+  margin-left: -1px;
   height: 100vh;
+}
+
+.images img:nth-child(2n) {
+  transform: scaleX(-1);
 }
 
 @keyframes marquee {
