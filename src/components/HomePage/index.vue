@@ -56,13 +56,13 @@ export default {
 
 .section-left h1 {
   color: #91702f;
-  font-size: var(--font-bigger-size);
+  font-size: var(--font-second-size);
 }
 
 .section-left h1 span {
   color: #898989;
   margin-left: 25px;
-  font-size: var(--font-second-size);
+  font-size: var(--font-main-size);
 }
 
 .section-left h1:nth-child(2) {
@@ -71,7 +71,7 @@ export default {
 
 .section-left p {
   color: #fff;
-  font-size: var(--font-size);
+  font-size: var(--font-main-size);
   line-height: 2;
   letter-spacing: 1px;
 }
@@ -84,7 +84,7 @@ export default {
 .button {
   color: #898989;
   margin-top: 30px;
-  font-size: var(--font-small-size);
+  font-size: var(--font-third-size);
   font-weight: 800;
   cursor: pointer;
 }

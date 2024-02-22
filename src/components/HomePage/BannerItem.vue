@@ -54,12 +54,13 @@ export default {
 
 .top {
   height: 50vh;
-  padding: 70px 0 0 100px;
+  padding-top: var(--logo-padding-top);
+  padding-left: var(--logo-padding-left);
 }
 
 .logo p:nth-child(1),
 .logo p:nth-child(2) {
-  font-size: 32px;
+  font-size: var(--title-main-size);
   font-weight: 500;
 }
 
@@ -69,12 +70,12 @@ export default {
 
 .logo p:nth-child(3) {
   font-family: "Qwigley";
-  font-size: 27.6px;
+  font-size: var(--title-second-size);
 }
 
 .bottom {
   height: 50vh;
-  padding: 0 0 70px 130px;
+  padding: var(--second-logo-padding);
   display: flex;
   align-items: center;
 }

@@ -44,11 +44,19 @@ export default {
   font-family: "Playfair Display", "Noto Serif TC", serif;
 }
 :root {
-  --font-bigger-size: 40px;
-  --font-second-size: 24px;
-  --font-size: 20px;
-  --font-small-size: 18px;
+  --font-main-size: 24px;
+  --font-second-size: 35px;
+  --font-third-size: 20px;
+  --font-menu-main-size: 40px;
+  --font-menu-second-size:28px;
   --left-width: 75px;
+  --menu-right: 150px;
+  --title-main-size: 32px;
+  --title-second-size: 27.6px;
+  --logo-padding-top: 70px;
+  --logo-padding-left: 100px;
+  --second-logo-padding: 0 0 70px 130px;
+  --logo-height: 200px;
 }
 
 @media (max-width: 950px) {
@@ -58,6 +66,9 @@ export default {
     --font-second-size: 24px;
     --font-small-size: 14px;
     --left-width: 0px;
+    --menu-right: 70px;
+    --logo-padding: 75px 0 0 50px;
+    --second-logo-padding: 0 0 60px 50px;
   }
 }
 

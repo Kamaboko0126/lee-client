@@ -7,8 +7,16 @@ export default {
     const isAnimating = ref(false);
 
     const menus = ref([
-      { name: "浮生幻景", path: "/" },
-      { name: "作品賞析", path: "/artworkappreciation" },
+      {
+        name: "浮生幻景",
+        path: "/",
+        markers: [],
+      },
+      {
+        name: "作品賞析",
+        path: "/artworkappreciation",
+        markers: ["第一期", "第二期", "第三期", "第四期"],
+      },
       { name: "藝術家介紹", path: "/artistintroduction" },
       { name: "展覽理念", path: "/exhibitionconcept" },
       { name: "動態消息", path: "/latestnews" },
@@ -69,7 +77,14 @@ export default {
           :to="menu.path"
           @click="isMenuOpen = false"
         >
-          {{ menu.name }}
+          <div class="item-p">
+            {{ menu.name }}
+          </div>
+          <div class="markers">
+            <div v-for="marker in menu.markers" :key="marker.id" class="marker">
+              <p>{{ marker }}</p>
+            </div>
+          </div>
         </router-link>
       </div>
     </div>
@@ -84,7 +99,7 @@ i {
   position: fixed;
   z-index: 99999;
   top: 90px;
-  right: 150px;
+  right: var(--menu-right);
   cursor: pointer;
   transition-duration: 2s;
   transition: 0.3s ease-in-out;
@@ -102,6 +117,7 @@ i:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow: auto;
 }
 
 .menu-left {
@@ -126,51 +142,81 @@ i:hover {
 
 .menu-right {
   width: calc(100% - var(--left-width));
-  height: 100%;
+  height: 100vh;
   background: #3e3a39;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
-  padding: 70px 0 0 100px;
+  padding-top: var(--logo-padding-top);
+  padding-left: var(--logo-padding-left);
 }
 
 .logo p:nth-child(1),
 .logo p:nth-child(2) {
-  font-size: 32px;
+  font-size: var(--title-main-size);
   font-weight: 500;
   color: #fff;
 }
 
 .logo p:nth-child(3) {
   font-family: "Qwigley";
-  font-size: 27.6px;
+  font-size: var(--title-second-size);
   color: #fff;
 }
 
 .menu-items {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - var(--logo-height));
+  overflow: auto;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: var(--logo-padding-top) 0 var(--logo-padding-top)
+    var(--logo-padding-left);
 }
 
 .menu-item {
-  font-size: var(--font-bigger-size);
+  padding: 40px 50px 40px 0;
+  flex-shrink: 0;
+}
+
+.item-p,
+.marker p {
+  font-size: var(--font-menu-main-size);
   font-weight: 600;
   color: #c9a063;
   cursor: pointer;
   position: relative;
   transition: 0.4s ease-in-out;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
-.menu-item:hover {
+.marker p {
+  font-size: var(--font-menu-second-size);
+  display: inline-block;
+}
+
+.markers {
+  padding-top: 20px;
+}
+
+.marker {
+  padding: 10px 0;
+}
+
+.item-p:hover,
+.marker p:hover {
   transform: scale(1.1);
 }
 
-.menu-item::after {
+.item-p::after,
+.marker p::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -181,7 +227,8 @@ i:hover {
   transition: 0.4s ease-in-out;
 }
 
-.menu-item:hover::after {
+.item-p:hover::after,
+.marker p:hover::after {
   width: 100%;
 }
 
@@ -195,19 +242,23 @@ i:hover {
 
 @keyframes expand {
   0% {
-    clip-path: circle(0% at calc(100% - 170px) calc(130px));
+    clip-path: circle(0% at calc(100% - var(--menu-right) - 20px) calc(130px));
   }
   100% {
-    clip-path: circle(150% at calc(100% - 160px) calc(100px));
+    clip-path: circle(
+      150% at calc(100% - var(--menu-right) - 10px) calc(100px)
+    );
   }
 }
 
 @keyframes close {
   0% {
-    clip-path: circle(150% at calc(100% - 160px) calc(100px));
+    clip-path: circle(
+      150% at calc(100% - var(--menu-right) - 10px) calc(100px)
+    );
   }
   100% {
-    clip-path: circle(0% at calc(100% - 170px) calc(120px));
+    clip-path: circle(0% at calc(100% - var(--menu-right) - 20px) calc(120px));
   }
 }
 </style>
