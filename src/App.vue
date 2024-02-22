@@ -13,6 +13,8 @@ export default {
     LoaderItem,
   },
   setup() {
+    document.title = "浮生幻景";
+
     //for all pages
     const isLoading = ref(false);
     provide("isLoading", isLoading);
@@ -21,8 +23,12 @@ export default {
     const isMenuOpen = ref(false);
     provide("isMenuOpen", isMenuOpen);
 
+    const showMenu = ref(false);
+    provide("showMenu", showMenu);
+
     return {
       isLoading,
+      showMenu,
     };
   },
 };
@@ -30,7 +36,7 @@ export default {
 
 <template>
   <LoaderItem v-if="isLoading" />
-  <MenuItem />
+  <MenuItem v-if="showMenu" />
   <LeftItem />
   <router-view />
   <FooterItem />
@@ -47,8 +53,6 @@ export default {
   --font-main-size: 24px;
   --font-second-size: 35px;
   --font-third-size: 20px;
-  --font-menu-main-size: 40px;
-  --font-menu-second-size:28px;
   --left-width: 75px;
   --menu-right: 150px;
   --title-main-size: 32px;
@@ -57,18 +61,40 @@ export default {
   --logo-padding-left: 100px;
   --second-logo-padding: 0 0 70px 130px;
   --logo-height: 200px;
+  --menu-icon-size: 60px;
+  --menu-font-size: 40px;
+  --menu-second-font-size: 28px;
 }
 
 @media (max-width: 950px) {
   :root {
-    --font-bigger-size: 30px;
-    --font-size: 18px;
-    --font-second-size: 24px;
-    --font-small-size: 14px;
+    --font-main-size: 22px;
+    --font-second-size: 27px;
+    --font-third-size: 18px;
     --left-width: 0px;
     --menu-right: 70px;
-    --logo-padding: 75px 0 0 50px;
+    --logo-padding-top: 75px;
+    --logo-padding-left: 50px;
     --second-logo-padding: 0 0 60px 50px;
+    --menu-icon-size: 50px;
+    --menu-font-size: 40px;
+    --menu-second-font-size: 28px;
+  }
+}
+
+@media (max-width: 500px) {
+  :root {
+    --font-main-size: 18px;
+    --font-second-size: 30px;
+    --font-third-size: 18px;
+    --left-width: 0px;
+    --menu-right: 40px;
+    --logo-padding-top: 80px;
+    --logo-padding-left: 40px;
+    --second-logo-padding: 0 0 60px 50px;
+    --title-main-size: 20px;
+    --title-second-size: 17.5px;
+    --menu-icon-size: 40px;
   }
 }
 

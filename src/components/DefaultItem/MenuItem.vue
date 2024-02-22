@@ -95,7 +95,7 @@ export default {
 i {
   width: 50px;
   height: 50px;
-  font-size: 60px;
+  font-size: var(--menu-icon-size);
   position: fixed;
   z-index: 99999;
   top: 90px;
@@ -187,7 +187,7 @@ i:hover {
 
 .item-p,
 .marker p {
-  font-size: var(--font-menu-main-size);
+  font-size: var(--menu-font-size);
   font-weight: 600;
   color: #c9a063;
   cursor: pointer;
@@ -198,7 +198,7 @@ i:hover {
 }
 
 .marker p {
-  font-size: var(--font-menu-second-size);
+  font-size: var(--menu-secont-font-size);
   display: inline-block;
 }
 

@@ -1,15 +1,42 @@
 <script>
 import BannerItem from "./BannerItem.vue";
-import {  } from "vue";
+import { inject, onMounted, provide, ref } from "vue";
 export default {
   name: "HomePage",
   components: {
     BannerItem,
   },
   setup() {
-    //取得App.vue的closeMenu
+    const showMenu = inject("showMenu");
+    const isLoading = inject("isLoading");
 
-    return {};
+    const bannerLoaded = ref(true);
+    provide("bannerLoaded", bannerLoaded);
+
+    const homepageLoaded = ref(false);
+    provide("homepageLoaded", homepageLoaded);
+
+    const homepageImg = require("@/assets/homepage.jpg");
+
+    onMounted(() => {
+      isLoading.value = true;
+    });
+
+    const onImageLoad = () => {
+      if (!bannerLoaded.value) {
+        return;
+      }
+      setTimeout(() => {
+        showMenu.value = true;
+        isLoading.value = false;
+        homepageLoaded.value = true;
+      }, 1000);
+    };
+
+    return {
+      homepageImg,
+      onImageLoad,
+    };
   },
 };
 </script>
@@ -19,20 +46,25 @@ export default {
   <section>
     <div class="section-content">
       <div class="section-left">
-        <h1>About<span>展覽理念</span></h1>
-        <h1>Exhibition concept</h1>
-        <p>
-          藝術家李貞慧現任東海大學美術系主任 ,膠彩作品風格自然清雅、氣韻生動又
-          兼具光彩迷幻之美。她長年觀察東海校 園景色,試圖捕捉光影的變化為其創作
-          上追求的目標。光線的變化除了在作品 中展現不同的亮度和色澤外,也呼應其
-          內心對時序改變及生命消逝的感嘆。
-        </p>
-        <router-link to="/exhibitionconcept" class="button"
-          >VIEW ALL</router-link
-        >
+        <div class="texts">
+          <h1>About<span>展覽理念</span></h1>
+          <h1>Exhibition concept</h1>
+          <p>
+            藝術家李貞慧。<br />
+            永遠的母親、妻子、女兒。教授。創作者。<br />
+            柔軔如藤、昂揚似松。<br />
+            她追逐光影，調皮如精靈玩弄顏料；<br />
+            她感悟生命，內觀自省、悠然自得。<br />
+            其作品於一筆一畫間完成禪修般的頓悟，<br />
+            自成生命第三境界。
+          </p>
+          <router-link to="/exhibitionconcept" class="button"
+            >VIEW ALL</router-link
+          >
+        </div>
       </div>
       <div class="section-right">
-        <img :src="require('@/assets/homepage.jpg')" alt="" />
+        <img :src="homepageImg" @load="onImageLoad" />
       </div>
     </div>
   </section>
@@ -45,13 +77,66 @@ export default {
 
 .section-left {
   width: 55%;
-  height: 100%;
   background: #2c2b2c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-right {
+  width: 45%;
+}
+
+@media (min-width: 951px) {
+  .section-right {
+    overflow: hidden;
+  }
+}
+
+.section-right img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 1200px) {
+  .section-left {
+    width: 63%;
+  }
+
+  .section-right {
+    width: 37%;
+  }
+}
+
+@media (max-width: 950px) {
+  .section-content {
+    flex-direction: column;
+  }
+
+  .texts {
+    padding: 100px 0;
+  }
+
+  .section-left,
+  .section-right {
+    width: 100%;
+  }
+
+  .section-right img {
+    overflow-x: hidden;
+    height: 50vh;
+  }
+}
+
+.texts {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 10%;
+  flex-shrink: 0;
 }
 
 .section-left h1 {
@@ -100,18 +185,5 @@ export default {
 
 .button:hover:after {
   width: 100%;
-}
-
-.section-right {
-  width: 45%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.section-right img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
 }
 </style>

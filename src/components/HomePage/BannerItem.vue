@@ -1,6 +1,28 @@
 <script>
+import { inject } from "vue";
 export default {
-  setup() {},
+  setup() {
+    const bannerLoaded = inject("bannerLoaded");
+    const bannerImg = require("@/assets/icon.png");
+    const homepageLoaded = inject("homepageLoaded");
+    const isLoading = inject("isLoading");
+    const showMenu = inject("showMenu");
+    const onLoad = () => {
+      if (!bannerLoaded.value) {
+        return;
+      }
+      setTimeout(() => {
+        homepageLoaded.value = true;
+        isLoading.value = false;
+        showMenu.value = true;
+      }, 1000);
+    };
+    return {
+      bannerLoaded,
+      bannerImg,
+      onLoad,
+    };
+  },
 };
 </script>
 
@@ -17,7 +39,7 @@ export default {
       <div class="bottom">
         <p class="rotated-text">Eastern Gouache art of Lee Chen-huei</p>
         <p class="vertical-text">李 貞 慧 膠 彩 藝 術</p>
-        <img :src="require('@/assets/icon.png')" alt="" />
+        <img :src="bannerImg" @load="onLoad" />
       </div>
     </div>
   </section>
