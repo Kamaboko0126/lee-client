@@ -1,10 +1,13 @@
 <script>
-import { inject, ref } from "vue";
+import { inject, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+
 export default {
   components: {},
   setup() {
     const isMenuOpen = inject("isMenuOpen");
     const isAnimating = ref(false);
+    const route = useRoute();
 
     const menus = ref([
       {
@@ -18,10 +21,8 @@ export default {
         markers: ["第一期", "第二期", "第三期", "第四期"],
       },
       { name: "藝術家介紹", path: "/artistintroduction" },
-      { name: "展覽理念", path: "/exhibitionconcept" },
-      { name: "動態消息", path: "/latestnews" },
       { name: "互動專區", path: "/interactivezone" },
-      { name: "採訪影片", path: "/interviewvideos" },
+      { name: "動態消息", path: "/latestnews" },
     ]);
 
     //click menu icon && setting menu animation
@@ -36,6 +37,14 @@ export default {
       }, 2000);
     };
 
+    // 監視路由變化
+    watch(
+      () => route.path,
+      () => {
+        window.scrollTo(0, 0);
+      }
+    );
+
     return {
       clickMenu,
       isMenuOpen,
@@ -48,7 +57,7 @@ export default {
 <template>
   <i
     class="material-icons"
-    :style="{ color: isMenuOpen ? '#fff' : '#3e3a39' }"
+    :style="{ color: isMenuOpen ? '#fff' : '#fff' }"
     @click="clickMenu"
     >{{ !isMenuOpen ? "menu" : "close" }}</i
   >
@@ -103,6 +112,12 @@ i {
   cursor: pointer;
   transition-duration: 2s;
   transition: 0.3s ease-in-out;
+  background: #3e3a39;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
 }
 
 i:hover {
@@ -185,6 +200,19 @@ i:hover {
   flex-shrink: 0;
 }
 
+@media (max-width: 950px) {
+  .menu-items {
+    flex-wrap: nowrap;
+    padding: calc(var(--logo-padding-top) - 30px) 0
+      calc(var(--logo-padding-top) - 30px) 0;
+    align-items: center;
+  }
+
+  .menu-item {
+    padding: 10px 0 10px 0;
+  }
+}
+
 .item-p,
 .marker p {
   font-size: var(--menu-font-size);
@@ -198,12 +226,18 @@ i:hover {
 }
 
 .marker p {
-  font-size: var(--menu-secont-font-size);
+  font-size: var(--menu-second-font-size);
   display: inline-block;
 }
 
 .markers {
   padding-top: 20px;
+}
+
+@media (max-width: 950px) {
+  .markers {
+    display: none;
+  }
 }
 
 .marker {

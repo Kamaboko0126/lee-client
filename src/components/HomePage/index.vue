@@ -20,6 +20,7 @@ export default {
 
     onMounted(() => {
       isLoading.value = true;
+      showMenu.value = false;
     });
 
     const onImageLoad = () => {
@@ -30,7 +31,7 @@ export default {
         showMenu.value = true;
         isLoading.value = false;
         homepageLoaded.value = true;
-      }, 1000);
+      }, 3000);
     };
 
     return {
@@ -43,41 +44,40 @@ export default {
 
 <template>
   <banner-item></banner-item>
-  <section>
-    <div class="section-content">
-      <div class="section-left">
-        <div class="texts">
-          <h1>About<span>展覽理念</span></h1>
-          <h1>Exhibition concept</h1>
-          <p>
-            藝術家李貞慧。<br />
-            永遠的母親、妻子、女兒。教授。創作者。<br />
-            柔軔如藤、昂揚似松。<br />
-            她追逐光影，調皮如精靈玩弄顏料；<br />
-            她感悟生命，內觀自省、悠然自得。<br />
-            其作品於一筆一畫間完成禪修般的頓悟，<br />
-            自成生命第三境界。
-          </p>
-          <router-link to="/exhibitionconcept" class="button"
-            >VIEW ALL</router-link
-          >
-        </div>
-      </div>
-      <div class="section-right">
-        <img :src="homepageImg" @load="onImageLoad" />
+  <div class="section-content">
+    <div class="section-left">
+      <div class="texts">
+        <h1>About<span>展覽理念</span></h1>
+        <h1>Exhibition concept</h1>
+        <p>
+          藝術家李貞慧。<br />
+          永遠的母親、妻子、女兒。教授。創作者。<br />
+          柔軔如藤、昂揚似松。<br />
+          她追逐光影，調皮如精靈玩弄顏料；<br />
+          她感悟生命，內觀自省、悠然自得。<br />
+          其作品於一筆一畫間完成禪修般的頓悟，<br />
+          自成生命第三境界。
+        </p>
+        <router-link to="/artistintroduction" class="button"
+          >VIEW ALL</router-link
+        >
       </div>
     </div>
-  </section>
+    <div class="section-right">
+      <img :src="homepageImg" @load="onImageLoad" />
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .section-content {
   display: flex;
+  min-height: 100vh;
 }
 
 .section-left {
   width: 55%;
-  background: #2c2b2c;
+  background: #3e3a39;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,7 +140,7 @@ export default {
 }
 
 .section-left h1 {
-  color: #91702f;
+  color: #c9a063;
   font-size: var(--font-second-size);
 }
 

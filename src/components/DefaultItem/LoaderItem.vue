@@ -1,69 +1,112 @@
 <template>
-  <section>
-    <div class="section-content">
-      <div class="loading">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
+  <div class="loader-body">
+    <div class="container">
+      <div class="pacman"></div>
+      <div class="path" v-for="n in 8" :key="n"></div>
     </div>
-  </section>
+  </div>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style scoped>
-section {
+<style lang="scss" scoped>
+.loader-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3e3a39;
+  height: 100vh;
+  width: 100%;
+  z-index: 999;
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 999999;
-}
-.section-content {
-  background: #3e3a39;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  overflow: hidden;
+  height: 30vh;
+  width: 30%;
 }
 
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #fff;
-  margin: 0 5px;
-  animation: bounce 1.5s infinite ease-in-out;
-}
-
-.dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes bounce {
-  0%,
-  80%,
-  100% {
-    transform: scale(0);
+@media (max-width:950px) {
+  .container{
+    width: 80%;
   }
-  40% {
-    transform: scale(1);
+}
+
+.pacman {
+  position: relative;
+  background: transparent;
+  z-index: 1;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: -35px;
+    display: block;
+    border-radius: 50%;
+    content: "";
+    height: 0px;
+    width: 0px;
+  }
+
+  &::before {
+    animation: chunk-top 0.5s ease infinite;
+    border: 35px solid #ffcc00;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+  }
+
+  &::after {
+    animation: chunk-bottom 0.5s ease infinite;
+    border: 35px solid #ffcc00;
+    border-right-color: transparent;
+    border-top-color: transparent;
+  }
+}
+
+.path {
+  display: flex;
+  justify-content: space-around;
+  animation: eating-path 0.5s linear infinite;
+  width: 100%;
+
+  &::before {
+    background: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 1rem;
+    width: 1rem;
+  }
+}
+
+@keyframes chunk-top {
+  0%,
+  100% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: rotate(-80deg);
+  }
+}
+
+@keyframes chunk-bottom {
+  0%,
+  100% {
+    transform: rotate(-40deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes eating-path {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 </style>

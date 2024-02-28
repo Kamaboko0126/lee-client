@@ -15,7 +15,7 @@ export default {
         homepageLoaded.value = true;
         isLoading.value = false;
         showMenu.value = true;
-      }, 1000);
+      }, 3000);
     };
     return {
       bannerLoaded,
@@ -112,6 +112,7 @@ export default {
 
 .vertical-text {
   writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
   text-orientation: upright;
   font-size: 1.9vh;
   margin: 0px 13px 0px 10px;

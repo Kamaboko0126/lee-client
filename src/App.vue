@@ -37,8 +37,14 @@ export default {
 <template>
   <LoaderItem v-if="isLoading" />
   <MenuItem v-if="showMenu" />
-  <LeftItem />
-  <router-view />
+  <div class="main">
+    <div class="left">
+      <LeftItem />
+    </div>
+    <div class="right">
+      <router-view />
+    </div>
+  </div>
   <FooterItem />
 </template>
 
@@ -53,6 +59,7 @@ export default {
   --font-main-size: 24px;
   --font-second-size: 35px;
   --font-third-size: 20px;
+  --font-fourth-size: 17px;
   --left-width: 75px;
   --menu-right: 150px;
   --title-main-size: 32px;
@@ -71,22 +78,23 @@ export default {
     --font-main-size: 22px;
     --font-second-size: 27px;
     --font-third-size: 18px;
+    --font-fourth-size: 15px;
     --left-width: 0px;
     --menu-right: 70px;
     --logo-padding-top: 75px;
     --logo-padding-left: 50px;
     --second-logo-padding: 0 0 60px 50px;
     --menu-icon-size: 50px;
-    --menu-font-size: 40px;
-    --menu-second-font-size: 28px;
+    --menu-font-size: 35px;
   }
 }
 
 @media (max-width: 500px) {
   :root {
     --font-main-size: 18px;
-    --font-second-size: 30px;
-    --font-third-size: 18px;
+    --font-second-size: 25px;
+    --font-third-size: 14px;
+  --font-fourth-size: 12px;
     --left-width: 0px;
     --menu-right: 40px;
     --logo-padding-top: 80px;
@@ -95,20 +103,20 @@ export default {
     --title-main-size: 20px;
     --title-second-size: 17.5px;
     --menu-icon-size: 40px;
+    --menu-font-size: 30px;
   }
 }
 
-section {
-  height: 100vh;
-  width: 100%;
+.main {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
 
-.section-content {
+.left {
+  width: var(--left-width);
+}
+
+.right {
   width: calc(100% - var(--left-width));
-  height: 100vh;
 }
 
 button {

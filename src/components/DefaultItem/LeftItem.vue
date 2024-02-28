@@ -77,4 +77,13 @@ export default {
   height: 100%;
   background: #232323;
 }
+
+@media (max-width: 950px) {
+  .content p {
+    display: none;
+  }
+  .bar-content {
+    display: none;
+  }
+}
 </style>

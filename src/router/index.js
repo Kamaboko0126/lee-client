@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: "/",
@@ -11,7 +11,7 @@ const router = createRouter({
     {
       path: "/artistintroduction",
       name: "artistintroduction",
-      component: () => import("@/components/ArtistIntroduction"),
+      component: () => import("@/components/ArtistIntroduction/"),
     },
     {
       path: "/artworkappreciation",
@@ -19,19 +19,9 @@ const router = createRouter({
       component: () => import("@/components/ArtworkAppreciation"),
     },
     {
-      path: "/exhibitionconcept",
-      name: "exhibitionconcept",
-      component: () => import("@/components/ExhibitionConcept"),
-    },
-    {
       path: "/interactivezone",
       name: "interactivezone",
       component: () => import("@/components/InteractiveZone"),
-    },
-    {
-      path: "/interviewvideos",
-      name: "interviewvideos",
-      component: () => import("@/components/InterviewVideos"),
     },
     {
       path: "/latestnews",
