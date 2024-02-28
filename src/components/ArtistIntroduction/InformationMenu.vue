@@ -63,7 +63,7 @@ export default {
 
 .title::before {
   content: "";
-  width: 50px;
+  width: 55px;
   height: 2px;
   display: inline-block;
   background: #4d4d4d;
@@ -97,5 +97,24 @@ export default {
 
 .value {
   margin-bottom: 25px;
+}
+
+@media (max-width: 950px) {
+  .menu-item:not(:last-child) {
+    margin-right: 20px;
+  }
+  .title::before {
+    width: 45px;
+  }
+}
+
+@media (max-width: 500px) {
+  .menu-item:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  .title::before {
+    width: 30px;
+  }
 }
 </style>
