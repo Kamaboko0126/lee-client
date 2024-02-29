@@ -8,6 +8,7 @@ export default {
     const isMenuOpen = inject("isMenuOpen");
     const isAnimating = ref(false);
     const route = useRoute();
+    const isLoading = inject("isLoading");
 
     const menus = ref([
       {
@@ -37,11 +38,16 @@ export default {
       }, 2000);
     };
 
+    const clickMenuItem = () => {
+      isMenuOpen.value = false;
+    };
+
     // 監視路由變化
     watch(
       () => route.path,
       () => {
         window.scrollTo(0, 0);
+        isLoading.value = true;
       }
     );
 
@@ -49,6 +55,7 @@ export default {
       clickMenu,
       isMenuOpen,
       menus,
+      clickMenuItem,
     };
   },
 };
@@ -84,7 +91,7 @@ export default {
           v-for="menu in menus"
           :key="menu.id"
           :to="menu.path"
-          @click="isMenuOpen = false"
+          @click="clickMenuItem"
         >
           <div class="item-p">
             {{ menu.name }}
@@ -117,7 +124,7 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: 35px;
 }
 
 i:hover {
@@ -276,7 +283,7 @@ i:hover {
 
 @keyframes expand {
   0% {
-    clip-path: circle(0% at calc(100% - var(--menu-right) - 20px) calc(130px));
+    clip-path: circle(0% at calc(100% - var(--menu-right) - 35px) calc(130px));
   }
   100% {
     clip-path: circle(
@@ -292,7 +299,7 @@ i:hover {
     );
   }
   100% {
-    clip-path: circle(0% at calc(100% - var(--menu-right) - 20px) calc(120px));
+    clip-path: circle(0% at calc(100% - var(--menu-right) - 35px) calc(120px));
   }
 }
 </style>

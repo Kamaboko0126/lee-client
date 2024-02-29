@@ -82,6 +82,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  padding: 50px 0;
 }
 
 .section-right {

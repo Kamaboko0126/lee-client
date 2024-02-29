@@ -9,6 +9,7 @@
     "deploy": "cross-env NODE_ENV=production vue-cli-service build && gh-pages -d dist"
   },
   "dependencies": {
+    "@vueuse/core": "^10.9.0",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-router": "^4.2.5"
