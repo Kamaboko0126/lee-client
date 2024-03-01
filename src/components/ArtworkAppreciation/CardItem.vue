@@ -1,12 +1,8 @@
 <script>
-import { nextTick, onMounted, ref } from "vue";
-import { useElementVisibility } from "@vueuse/core";
+import { ref } from "vue";
 
 export default {
   setup() {
-    const cardRef = ref(null);
-    let isVisible = ref(false);
-
     const periods = ref([
       {
         name: "第一階段(1987-1993)：構圖與顏色的遊戲",
@@ -36,14 +32,8 @@ export default {
       //   { name: "第四階段", value: "" },
     ]);
 
-    onMounted(async () => {
-      await nextTick();
-      isVisible = useElementVisibility(cardRef);
-    });
     return {
       periods,
-      cardRef,
-      isVisible,
     };
   },
 };
@@ -51,15 +41,9 @@ export default {
 
 <template>
   <div class="cards">
-    <div
-      class="card"
-      v-for="period in periods"
-      :key="period.id"
-      ref="cardRef"
-      v-show="isVisible"
-    >
+    <div class="card animated" v-for="period in periods" :key="period.id">
       <div>{{ period.name }}</div>
-      <div v-html="period.value" class="animated"></div>
+      <div v-html="period.value"></div>
     </div>
   </div>
 </template>

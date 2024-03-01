@@ -56,17 +56,18 @@ export default {
     <div class="content">
       <div>
         <p>
-          　　李貞慧針對2022年在彰化生活美學館以及台中市葫蘆墩文化中心的個展，將其作品分為四階段，分別為：
+          李貞慧針對2022年在彰化生活美學館以及台中市葫蘆墩文化中心的個展，將其作品分為四階段，分別為：
+        </p>
+        <p>
+          第一期：1987-1993 ／ 第二期：1994-1996 ／ 第三期：2003-2008 ／
+          第四期：2011-2022
         </p>
         <br />
-        <div class="words">
-          <p>第一期：1987-1993</p>
-          <p>第二期：1994-1996</p>
-          <p>第三期：2003-2008</p>
-          <p>第四期：2011-2022</p>
-        </div>
         <p>
-          　　筆者根據李貞慧作品風格，將其自1987-2022，共計三十五年的創作生涯，初分為三大階段。吾人相信，以貞慧之勤奮及慧眼識物之情，未來十年，必將再創藝術高峰：
+          筆者根據李貞慧作品風格，將其自1987-2022，共計三十五年的創作生涯，初分為三大階段。
+        </p>
+        <p>
+          吾人相信，以貞慧之勤奮及慧眼識物之情，未來十年，必將再創藝術高峰：
         </p>
       </div>
     </div>
@@ -105,6 +106,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   color: #fff;
   font-size: var(--font-main-size);
   padding: 20px 10%;
@@ -114,7 +116,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   padding: 0 0 30px 0;
+}
+
+.words p:not(:last-child) {
+  margin-right: 20px;
 }
 </style>
