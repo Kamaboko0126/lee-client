@@ -56,11 +56,8 @@ export default {
     <div class="content">
       <div>
         <p>
-          李貞慧針對2022年在彰化生活美學館以及台中市葫蘆墩文化中心的個展，將其作品分為四階段，分別為：
-        </p>
-        <p>
-          第一期：1987-1993 ／ 第二期：1994-1996 ／ 第三期：2003-2008 ／
-          第四期：2011-2022
+          李貞慧針對2022年在彰化生活美學館以及台中市葫蘆墩文化中心的個展，將其作品分為四階段，分別為：第一期：1987-1993
+          ／ 第二期：1994-1996 ／ 第三期：2003-2008
         </p>
         <br />
         <p>
@@ -71,9 +68,9 @@ export default {
         </p>
       </div>
     </div>
-    <CardItem />
     <p>針對以上三大階段，本專題網頁自每個階段各選出數張作品以饗讀者：</p>
   </div>
+  <CardItem />
 </template>
 
 <style scoped>
@@ -110,6 +107,16 @@ export default {
   color: #fff;
   font-size: var(--font-main-size);
   padding: 20px 10%;
+  line-height: 2.4;
+  font-size: 15px;
+  font-feature-settings: "palt" on;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
 }
 
 .words {

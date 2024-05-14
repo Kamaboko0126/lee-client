@@ -101,7 +101,7 @@ export default {
 </script>
 
 <template>
-  <div class="body">
+  <div class="body" :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }">
     <div class="title">
       <div>
         <span>FLOATING FANTASY</span>
@@ -133,8 +133,9 @@ export default {
 .body {
   display: flex;
   padding: 10vh 10% 10vh 0;
+  padding-top: 10vh;
   flex-direction: column;
-  background: #3e3a39;
+  /* background: #3e3a39; */
 }
 
 .title {

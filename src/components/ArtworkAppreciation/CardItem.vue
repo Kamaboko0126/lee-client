@@ -56,7 +56,6 @@ export default {
 }
 
 .card {
-  color: #fff;
   width: 100%;
   display: flex;
   flex-direction: column;

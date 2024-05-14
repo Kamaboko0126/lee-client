@@ -53,12 +53,14 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Playfair Display", "Noto Serif TC", serif;
+  font-family: "source-han-sans-traditional", sans-serif;
+font-weight: 100;
+font-style: normal;
 }
 :root {
-  --font-main-size: 24px;
-  --font-second-size: 35px;
-  --font-third-size: 20px;
+  --font-main-size: 20px;
+  --font-second-size: 32px;
+  --font-third-size: 18px;
   --font-fourth-size: 17px;
   --left-width: 75px;
   --menu-right: 150px;

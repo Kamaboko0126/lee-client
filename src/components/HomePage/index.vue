@@ -45,7 +45,7 @@ export default {
 <template>
   <banner-item></banner-item>
   <div class="section-content">
-    <div class="section-left">
+    <div class="section-left" :style="{ backgroundImage: `url(${require('@/assets/1213.png')})` }">
       <div class="texts">
         <h1>About<span>展覽理念</span></h1>
         <h1>Exhibition concept</h1>
@@ -83,6 +83,8 @@ export default {
   justify-content: center;
   flex-shrink: 0;
   padding: 50px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .section-right {
