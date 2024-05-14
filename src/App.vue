@@ -71,6 +71,7 @@ export default {
   --menu-icon-size: 60px;
   --menu-font-size: 40px;
   --menu-second-font-size: 28px;
+  --background-color:#3e3a39;
 }
 
 @media (max-width: 950px) {

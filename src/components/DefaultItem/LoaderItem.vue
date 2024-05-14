@@ -1,112 +1,99 @@
 <template>
-  <div class="loader-body">
-    <div class="container">
-      <div class="pacman"></div>
-      <div class="path" v-for="n in 8" :key="n"></div>
+  <div id="body">
+    <div id="loader">
+      <div id="box"></div>
+      <div id="hill"></div>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.loader-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #3e3a39;
+<style scoped>
+#body {
+  position: absolute;
+  z-index: 9999999;
+  width: 100%;
   height: 100vh;
-  width: 100%;
-  z-index: 999;
-  position: fixed;
-  top: 0;
+  background: var(--background-color);
+}
+
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -2.7em;
+  margin-left: -2.7em;
+  width: 5.4em;
+  height: 5.4em;
+  background:var(--background-color);
+  transform: scale(3);
+}
+
+#hill {
+  position: absolute;
+  width: 7.1em;
+  height: 7.1em;
+  top: 1.7em;
+  left: 1.7em;
+  background-color: transparent;
+  border-left: 0.25em solid whitesmoke;
+  transform: rotate(45deg);
+}
+
+#hill:after {
+  content: "";
+  position: absolute;
+  width: 7.1em;
+  height: 7.1em;
   left: 0;
+  background:var(--background-color);
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  height: 30vh;
-  width: 30%;
+#box {
+  position: absolute;
+  left: 0;
+  bottom: -0.1em;
+  width: 1em;
+  height: 1em;
+  background-color: transparent;
+  border: 0.25em solid whitesmoke;
+  border-radius: 15%;
+  transform: translate(0, -1em) rotate(-45deg);
+  animation: push 2.5s cubic-bezier(0.79, 0, 0.47, 0.97) infinite;
 }
 
-@media (max-width:950px) {
-  .container{
-    width: 80%;
-  }
-}
-
-.pacman {
-  position: relative;
-  background: transparent;
-  z-index: 1;
-
-  &::before,
-  &::after {
-    position: absolute;
-    top: -35px;
-    display: block;
-    border-radius: 50%;
-    content: "";
-    height: 0px;
-    width: 0px;
-  }
-
-  &::before {
-    animation: chunk-top 0.5s ease infinite;
-    border: 35px solid #ffcc00;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-  }
-
-  &::after {
-    animation: chunk-bottom 0.5s ease infinite;
-    border: 35px solid #ffcc00;
-    border-right-color: transparent;
-    border-top-color: transparent;
-  }
-}
-
-.path {
-  display: flex;
-  justify-content: space-around;
-  animation: eating-path 0.5s linear infinite;
-  width: 100%;
-
-  &::before {
-    background: #fff;
-    border-radius: 50%;
-    content: "";
-    height: 1rem;
-    width: 1rem;
-  }
-}
-
-@keyframes chunk-top {
-  0%,
-  100% {
-    transform: rotate(-45deg);
-  }
-  50% {
-    transform: rotate(-80deg);
-  }
-}
-
-@keyframes chunk-bottom {
-  0%,
-  100% {
-    transform: rotate(-40deg);
-  }
-  50% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes eating-path {
+@keyframes push {
   0% {
-    transform: translateX(50%);
+    transform: translate(0, -1em) rotate(-45deg);
+  }
+  5% {
+    transform: translate(0, -1em) rotate(-50deg);
+  }
+  20% {
+    transform: translate(1em, -2em) rotate(47deg);
+  }
+  25% {
+    transform: translate(1em, -2em) rotate(45deg);
+  }
+  30% {
+    transform: translate(1em, -2em) rotate(40deg);
+  }
+  45% {
+    transform: translate(2em, -3em) rotate(137deg);
+  }
+  50% {
+    transform: translate(2em, -3em) rotate(135deg);
+  }
+  55% {
+    transform: translate(2em, -3em) rotate(130deg);
+  }
+  70% {
+    transform: translate(3em, -4em) rotate(217deg);
+  }
+  75% {
+    transform: translate(3em, -4em) rotate(220deg);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate(0, -1em) rotate(-225deg);
   }
 }
 </style>
