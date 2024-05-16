@@ -135,7 +135,6 @@ export default {
   padding: 10vh 10% 10vh 0;
   padding-top: 10vh;
   flex-direction: column;
-  /* background: #3e3a39; */
 }
 
 .title {

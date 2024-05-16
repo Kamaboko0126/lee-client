@@ -31,9 +31,9 @@ export default {
     <div class="section-content float-content">
       <div class="top">
         <div class="logo">
-          <p>FLOATING FANTASY</p>
-          <p>FLOATING FANTASY</p>
-          <p>- Eastern Gouache art of Lee Chen-huei -</p>
+          <h1>FLOATING FANTASY</h1>
+          <h1>FLOATING FANTASY</h1>
+          <h3>- Eastern Gouache art of Lee Chen-huei -</h3>
         </div>
       </div>
       <div class="bottom">
@@ -80,33 +80,35 @@ export default {
   padding-left: var(--logo-padding-left);
 }
 
-.logo p:nth-child(1),
-.logo p:nth-child(2) {
-  font-size: var(--title-main-size);
+.logo h1 {
+  font-family: "Playfair Display" !important;
   font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
 }
 
-.logo p:nth-child(2) {
+.logo h1:nth-child(2) {
   color: #9a6a25;
 }
 
-.logo p:nth-child(3) {
+.logo h3 {
   font-family: "Qwigley";
-  font-size: var(--title-second-size);
+  line-height: normal;
+  letter-spacing: 0;
 }
 
 .bottom {
   height: 50vh;
-  padding: var(--second-logo-padding);
+  padding: var(--logo-padding-second);
   display: flex;
   align-items: center;
 }
 
 .rotated-text {
+  font-family: "Playfair Display";
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  font-size: 1.6vh;
-  font-weight: 800;
+  font-weight: 600;
   color: #232323;
 }
 
@@ -114,9 +116,8 @@ export default {
   writing-mode: vertical-rl;
   -webkit-writing-mode: vertical-rl;
   text-orientation: upright;
-  font-size: 1.9vh;
-  margin: 0px 13px 0px 10px;
-  font-weight: 800;
+  font-weight: 600;
+  letter-spacing: 5px;
   color: #232323;
 }
 

@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .content {
-  width: var(--left-width);
+  width: var(--leftitem-width);
   height: 100vh;
   position: fixed;
   left: 0;
@@ -55,6 +55,7 @@ export default {
   flex-direction: column;
   padding: 5vh 0;
   box-shadow: 4px 0px 2px #efeeed;
+  background: #fff;
 }
 
 .content p {

@@ -9,11 +9,11 @@
 
 <style scoped>
 #body {
-  position: absolute;
+  position: fixed;
   z-index: 9999999;
   width: 100%;
   height: 100vh;
-  background: var(--background-color);
+  background: var(--main-color);
 }
 
 #loader {
@@ -24,7 +24,7 @@
   margin-left: -2.7em;
   width: 5.4em;
   height: 5.4em;
-  background:var(--background-color);
+  background:var(--main-color);
   transform: scale(3);
 }
 
@@ -45,7 +45,7 @@
   width: 7.1em;
   height: 7.1em;
   left: 0;
-  background:var(--background-color);
+  background:var(--main-color);
 }
 
 #box {

@@ -54,60 +54,93 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "source-han-sans-traditional", sans-serif;
-font-weight: 100;
-font-style: normal;
+  font-weight: 100;
+  font-style: normal;
 }
+
 :root {
-  --font-main-size: 20px;
-  --font-second-size: 32px;
-  --font-third-size: 18px;
-  --font-fourth-size: 17px;
-  --left-width: 75px;
-  --menu-right: 150px;
+  --main-color: #3e3a39;
+
+  --font-main-size: 15px;
+  
   --title-main-size: 32px;
-  --title-second-size: 27.6px;
+  --title-second-size: 18px;
+  --title-third-size: 28px;
+
+  --font-fourth-size: 17px;
+
+  --leftitem-width: 75px;
+  
   --logo-padding-top: 70px;
   --logo-padding-left: 100px;
-  --second-logo-padding: 0 0 70px 130px;
+  --logo-padding-second: 0 0 70px 130px;
   --logo-height: 200px;
+
+  --menuicon-position-right: 150px;
   --menu-icon-size: 60px;
   --menu-font-size: 40px;
   --menu-second-font-size: 28px;
-  --background-color:#3e3a39;
 }
 
 @media (max-width: 950px) {
   :root {
-    --font-main-size: 22px;
-    --font-second-size: 27px;
-    --font-third-size: 18px;
-    --font-fourth-size: 15px;
-    --left-width: 0px;
-    --menu-right: 70px;
-    --logo-padding-top: 75px;
-    --logo-padding-left: 50px;
-    --second-logo-padding: 0 0 60px 50px;
+    --font-main-size: 15px;
+
+
+    --leftitem-width: 0px;
+
+    --menuicon-position-right: 70px;
     --menu-icon-size: 50px;
     --menu-font-size: 35px;
+
+    --logo-padding-top: 75px;
+    --logo-padding-left: 50px;
+    --logo-padding-second: 0 0 60px 50px;
   }
 }
 
 @media (max-width: 500px) {
   :root {
-    --font-main-size: 18px;
-    --font-second-size: 25px;
-    --font-third-size: 14px;
-  --font-fourth-size: 12px;
-    --left-width: 0px;
-    --menu-right: 40px;
+    --font-main-size: 15px;
+
+    --leftitem-width: 0px;
+    
     --logo-padding-top: 80px;
     --logo-padding-left: 40px;
-    --second-logo-padding: 0 0 60px 50px;
-    --title-main-size: 20px;
-    --title-second-size: 17.5px;
+    --logo-padding-second: 0 0 60px 50px;
+        
+    --menuicon-position-right: 40px;
     --menu-icon-size: 40px;
     --menu-font-size: 30px;
   }
+}
+
+p,h1,h2,h3 {
+  line-height: 2.4;
+  font-size: var(--font-main-size);
+  font-feature-settings: "palt" on;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+}
+
+h1,h2,h3{
+  font-size: var(--title-main-size);
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: 300;
+}
+
+h2{
+  font-size: var(--title-second-size);
+}
+
+h3{
+  font-size: var(--title-third-size);
 }
 
 .main {
@@ -115,11 +148,11 @@ font-style: normal;
 }
 
 .left {
-  width: var(--left-width);
+  width: var(--leftitem-width);
 }
 
 .right {
-  width: calc(100% - var(--left-width));
+  width: calc(100% - var(--leftitem-width));
 }
 
 button {

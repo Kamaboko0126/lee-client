@@ -59,7 +59,7 @@ export default {
   align-items: center;
   justify-content: start;
   color: #fff;
-  background: var(--background-color);
+  background: var(--main-color);
   padding: 10vh 0 5vh 0;
 }
 

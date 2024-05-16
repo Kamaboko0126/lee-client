@@ -48,27 +48,21 @@ export default {
   <div class="body">
     <div class="title">
       <div>
-        <span>FLOATING FANTASY</span>
-        <p>浮 生 幻 景</p>
+        <h1>FLOATING FANTASY</h1>
+        <h1>浮 生 幻 景</h1>
       </div>
     </div>
 
     <div class="content">
       <div>
         <p>
-          李貞慧針對2022年在彰化生活美學館以及台中市葫蘆墩文化中心的個展，將其作品分為四階段，分別為：第一期：1987-1993
-          ／ 第二期：1994-1996 ／ 第三期：2003-2008
-        </p>
-        <br />
-        <p>
-          筆者根據李貞慧作品風格，將其自1987-2022，共計三十五年的創作生涯，初分為三大階段。
+          根據作品風格，將1987-2022，共計三十五年的創作生涯，分為三大階段：
         </p>
         <p>
-          吾人相信，以貞慧之勤奮及慧眼識物之情，未來十年，必將再創藝術高峰：
+          第一階段：1987-1993 ／ 第二階段：1994-2010 ／ 第三階段：2011-2022
         </p>
       </div>
     </div>
-    <p>針對以上三大階段，本專題網頁自每個階段各選出數張作品以饗讀者：</p>
   </div>
   <CardItem />
 </template>
@@ -78,7 +72,7 @@ export default {
   display: flex;
   padding: 10vh 0 10vh 0;
   flex-direction: column;
-  background: #3e3a39;
+  background: var(--main-color);
 }
 
 .title {
@@ -107,16 +101,6 @@ export default {
   color: #fff;
   font-size: var(--font-main-size);
   padding: 20px 10%;
-  line-height: 2.4;
-  font-size: 15px;
-  font-feature-settings: "palt" on;
-  letter-spacing: 0.15em;
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  unicode-bidi: isolate;
 }
 
 .words {

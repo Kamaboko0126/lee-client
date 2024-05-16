@@ -77,7 +77,6 @@ export default {
 
 .section-left {
   width: 55%;
-  background: #3e3a39;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,13 +143,12 @@ export default {
 
 .section-left h1 {
   color: #c9a063;
-  font-size: var(--font-second-size);
 }
 
 .section-left h1 span {
   color: #898989;
   margin-left: 25px;
-  font-size: var(--font-main-size);
+  font-size: var(--title-second-size);
 }
 
 .section-left h1:nth-child(2) {
@@ -159,21 +157,18 @@ export default {
 
 .section-left p {
   color: #fff;
-  font-size: var(--font-main-size);
-  line-height: 2;
-  letter-spacing: 1px;
 }
 
-.section-left h1:nth-child(2),
+/* .section-left h1:nth-child(2),
 .section-left p {
   margin-top: 60px;
-}
+} */
 
 .button {
   color: #898989;
-  margin-top: 30px;
+  margin-top: 15px;
   font-size: var(--font-third-size);
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
 }
 

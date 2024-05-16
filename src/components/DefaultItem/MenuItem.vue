@@ -81,9 +81,9 @@ export default {
     </div>
     <div class="menu-right">
       <div class="logo">
-        <p>FLOATING FANTASY</p>
-        <p>FLOATING FANTASY</p>
-        <p>- Eastern Gouache art of Lee Chen-huei -</p>
+        <h1>FLOATING FANTASY</h1>
+        <h1>FLOATING FANTASY</h1>
+        <h3>- Eastern Gouache art of Lee Chen-huei -</h3>
       </div>
       <div class="menu-items">
         <router-link
@@ -115,11 +115,11 @@ i {
   position: fixed;
   z-index: 99999;
   top: 90px;
-  right: var(--menu-right);
+  right: var(--menuicon-position-right);
   cursor: pointer;
   transition-duration: 2s;
   transition: 0.3s ease-in-out;
-  background: #3e3a39;
+  background: var(--main-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -143,7 +143,7 @@ i:hover {
 }
 
 .menu-left {
-  width: var(--left-width);
+  width: var(--leftitem-width);
   height: 100%;
   background: #fff;
   writing-mode: vertical-rl;
@@ -163,9 +163,9 @@ i:hover {
 }
 
 .menu-right {
-  width: calc(100% - var(--left-width));
+  width: calc(100% - var(--leftitem-width));
   height: 100vh;
-  background: #3e3a39;
+  background: var(--main-color);
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -176,16 +176,18 @@ i:hover {
   padding-left: var(--logo-padding-left);
 }
 
-.logo p:nth-child(1),
-.logo p:nth-child(2) {
-  font-size: var(--title-main-size);
+.logo h1{
+  font-family: "Playfair Display" !important;
   font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
   color: #fff;
 }
 
-.logo p:nth-child(3) {
+.logo h3 {
   font-family: "Qwigley";
-  font-size: var(--title-second-size);
+  line-height: normal;
+  letter-spacing: 0;
   color: #fff;
 }
 
@@ -283,11 +285,11 @@ i:hover {
 
 @keyframes expand {
   0% {
-    clip-path: circle(0% at calc(100% - var(--menu-right) - 35px) calc(130px));
+    clip-path: circle(0% at calc(100% - var(--menuicon-position-right) - 35px) calc(130px));
   }
   100% {
     clip-path: circle(
-      150% at calc(100% - var(--menu-right) - 10px) calc(100px)
+      150% at calc(100% - var(--menuicon-position-right) - 10px) calc(100px)
     );
   }
 }
@@ -295,11 +297,11 @@ i:hover {
 @keyframes close {
   0% {
     clip-path: circle(
-      150% at calc(100% - var(--menu-right) - 10px) calc(100px)
+      150% at calc(100% - var(--menuicon-position-right) - 10px) calc(100px)
     );
   }
   100% {
-    clip-path: circle(0% at calc(100% - var(--menu-right) - 35px) calc(120px));
+    clip-path: circle(0% at calc(100% - var(--menuicon-position-right) - 35px) calc(120px));
   }
 }
 </style>

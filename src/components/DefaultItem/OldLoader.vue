@@ -25,7 +25,7 @@ section {
   z-index: 999999;
 }
 .section-content {
-  background: #3e3a39;
+  background: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: center;
