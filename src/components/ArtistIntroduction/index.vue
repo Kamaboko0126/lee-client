@@ -102,7 +102,7 @@ export default {
 
 <template>
   <div
-    class="body"
+    class="header"
     :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }"
   >
     <div class="title">
@@ -133,7 +133,7 @@ export default {
 </template>
 
 <style scoped>
-.body {
+.header {
   display: flex;
   padding: var(--logo-padding-top) 10% var(--logo-padding-top) 0;
   flex-direction: column;

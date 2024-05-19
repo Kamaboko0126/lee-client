@@ -97,6 +97,10 @@ export default {
   padding: 0 10% 50px;
 }
 
+.information p{
+  font-weight: 400;
+}
+
 @media (max-width: 950px) {
   .menu-item:not(:last-child) {
     margin-right: 20px;

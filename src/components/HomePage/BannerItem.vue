@@ -121,6 +121,12 @@ export default {
   color: #232323;
 }
 
+.rotated-text,
+.vertical-text {
+  line-height: normal;
+  margin: 8px;
+}
+
 .bottom img {
   height: 100%;
 }

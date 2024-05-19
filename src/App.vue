@@ -80,6 +80,8 @@ export default {
   --menu-icon-size: 60px;
   --menu-font-size: 40px;
   --menu-second-font-size: 28px;
+
+  --letter-scale: 2;
 }
 
 @media (max-width: 950px) {
@@ -95,6 +97,7 @@ export default {
     --logo-padding-top: 75px;
     --logo-padding-left: 50px;
     --logo-padding-second: 0 0 60px 50px;
+    --letter-scale: 1.8;
   }
 }
 
@@ -111,6 +114,7 @@ export default {
     --menuicon-position-right: 40px;
     --menu-icon-size: 40px;
     --menu-font-size: 30px;
+    --letter-scale: 1.5;
   }
 }
 

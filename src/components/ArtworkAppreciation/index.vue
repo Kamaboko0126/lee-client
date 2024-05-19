@@ -45,7 +45,7 @@ export default {
 </script>
 
 <template>
-  <div class="body">
+  <div class="header">
     <div class="title">
       <div>
         <h1>FLOATING FANTASY</h1>
@@ -64,7 +64,7 @@ export default {
 </template>
 
 <style scoped>
-.body {
+.header {
   display: flex;
   padding: 10vh 0 10vh 0;
   flex-direction: column;
@@ -112,14 +112,4 @@ export default {
   padding-top: var(--logo-padding-top);
 }
 
-.words {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0 30px 0;
-}
-
-.words p:not(:last-child) {
-  margin-right: 20px;
-}
 </style>

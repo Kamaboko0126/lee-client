@@ -1,37 +1,7 @@
-<template>
-  <div class="body">
-    <div class="title">
-      <div>
-        <span>FLOATING FANTASY</span>
-        <p>浮 生 幻 景</p>
-      </div>
-    </div>
-    <div class="wrod">Contact us!</div>
-
-    <div class="content">
-      <div class="letter-image">
-        <div class="animated-mail">
-          <div class="back-fold"></div>
-          <div class="letter">
-            <div class="letter-border"></div>
-            <div class="letter-title"></div>
-            <div class="letter-context"></div>
-            <div class="letter-stamp">
-              <div class="letter-stamp-inner"></div>
-            </div>
-          </div>
-          <div class="top-fold"></div>
-          <div class="body"></div>
-          <div class="left-fold"></div>
-        </div>
-        <div class="shadow"></div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
-import { onMounted, inject } from "vue";
+import { onMounted, inject, reactive } from "vue";
+import { useClipboard } from "@vueuse/core";
+
 export default {
   setup() {
     onMounted(() => {
@@ -42,25 +12,101 @@ export default {
       showMenu.value = true;
     });
 
-    return {};
+    const copied = reactive({});
+    const { text, copy: copyToClipboard, isSupported } = useClipboard();
+
+    const copy = (value) => {
+      copyToClipboard(value);
+      copied[value] = true;
+      setTimeout(() => {
+        copied[value] = false;
+      }, 1500);
+    };
+
+    return {
+      text,
+      copy,
+      copied,
+      isSupported,
+    };
   },
 };
 </script>
 
+<template>
+  <div class="header">
+    <div class="title">
+      <div>
+        <h1>FLOATING FANTASY</h1>
+        <h1>浮 生 幻 景</h1>
+      </div>
+    </div>
+  </div>
+
+  <h2>Contact us!</h2>
+  <div class="content">
+    <div class="letter-image">
+      <div class="animated-mail">
+        <div class="back-fold"></div>
+        <div class="letter">
+          <div class="letter-border"></div>
+          <div class="letter-text" @click="copy('aaa123@gmail.com')">
+            <p>
+              <span v-if="!copied['aaa123@gmail.com']"
+                >Email: aaa123@gmail.com</span
+              >
+              <span v-else>Email: Copied!</span>
+            </p>
+          </div>
+          <div class="letter-text" @click="copy('0912345678')">
+            <p>
+              <span v-if="!copied['0912345678']">Phone: 09-1234-5678</span>
+              <span v-else>Phone: Copied!</span>
+            </p>
+          </div>
+          <div class="letter-text"><p>李貞慧</p></div>
+          <div class="letter-stamp">
+            <div class="letter-stamp-inner"></div>
+          </div>
+        </div>
+        <div class="top-fold"></div>
+        <div class="body"></div>
+        <div class="left-fold"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+  </div>
+</template>
+
 <style lang="scss" scoped>
-.body {
+.header {
   width: 100%;
+  display: flex;
+  padding: 10vh 0 5vh 0;
+  flex-direction: column;
+  background: var(--main-color);
+  overflow-x: hidden;
 }
 
 .title {
-  font-size: var(--font-second-size);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: start;
   color: #fff;
-  background: var(--main-color);
-  padding: 10vh 0 5vh 0;
+}
+
+.title div h1 {
+  font-family: "Playfair Display" !important;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.title div h1:last-child {
+  color: #c9a063;
+  font-weight: 600;
+  letter-spacing: 5px;
 }
 
 .title::before {
@@ -70,6 +116,7 @@ export default {
   width: 55px;
   height: 2px;
   background: #fff;
+  margin-right: 10px;
 }
 
 @media (max-width: 950px) {
@@ -84,45 +131,30 @@ export default {
   }
 }
 
-.wrod {
+h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 50px 0 100px;
+  padding: 50px 0 0 0;
 }
 
-@media (min-width: 900px) {
-  .content {
-    padding: 18vh 0 0 0;
-    transform: scale(2);
-  }
-}
-
-@media (min-width: 600px) {
-  .content {
-    padding: 13vh 0 0 0;
-    transform: scale(1.5);
-  }
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
 .letter-image {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  height: 200px;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  cursor: pointer;
+  width: calc(200px * var(--letter-scale));
+  height: calc(200px * var(--letter-scale));
 }
 
 .animated-mail {
   position: absolute;
-  height: 150px;
-  width: 200px;
-  -webkit-transition: 0.4s;
-  -moz-transition: 0.4s;
+  height: calc(150px * var(--letter-scale));
+  width: calc(200px * var(--letter-scale));
   transition: 0.4s;
 
   .body {
@@ -131,22 +163,20 @@ export default {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 0 100px 200px;
+    border-width: 0 0 calc(100px * var(--letter-scale))
+      calc(200px * var(--letter-scale));
     border-color: transparent transparent #e95f55 transparent;
     z-index: 2;
   }
 
   .top-fold {
     position: absolute;
-    top: 50px;
+    top: calc(50px * var(--letter-scale));
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 50px 100px 0 100px;
-    -webkit-transform-origin: 50% 0%;
-    -webkit-transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
-    -moz-transform-origin: 50% 0%;
-    -moz-transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
+    border-width: calc(50px * var(--letter-scale))
+      calc(100px * var(--letter-scale)) 0 calc(100px * var(--letter-scale));
     transform-origin: 50% 0%;
     transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
     border-color: #cf4a43 transparent transparent transparent;
@@ -156,8 +186,8 @@ export default {
   .back-fold {
     position: absolute;
     bottom: 0;
-    width: 200px;
-    height: 100px;
+    width: calc(200px * var(--letter-scale));
+    height: calc(100px * var(--letter-scale));
     background: #cf4a43;
     z-index: 0;
   }
@@ -168,26 +198,25 @@ export default {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 50px 0 50px 100px;
+    border-width: calc(50px * var(--letter-scale)) 0
+      calc(50px * var(--letter-scale)) calc(100px * var(--letter-scale));
     border-color: transparent transparent transparent #e15349;
     z-index: 2;
   }
 
   .letter {
-    left: 20px;
+    left: calc(20px * var(--letter-scale));
     bottom: 0px;
     position: absolute;
-    width: 160px;
-    height: 60px;
+    width: calc(160px * var(--letter-scale));
+    height: calc(60px * var(--letter-scale));
     background: white;
     z-index: 1;
     overflow: hidden;
-    -webkit-transition: 0.4s 0.2s;
-    -moz-transition: 0.4s 0.2s;
     transition: 0.4s 0.2s;
 
     .letter-border {
-      height: 10px;
+      height: calc(10px * var(--letter-scale));
       width: 100%;
       background: repeating-linear-gradient(
         -45deg,
@@ -198,27 +227,26 @@ export default {
       );
     }
 
-    .letter-title {
-      margin-top: 10px;
-      margin-left: 5px;
-      height: 10px;
-      width: 40%;
-      background: #cb5a5e;
+    .letter-text {
+      margin-top: calc(10px * var(--letter-scale));
+      margin-left: calc(5px * var(--letter-scale));
+      height: calc(10px * var(--letter-scale));
+      cursor: pointer;
+      // width: 40%;
     }
-    .letter-context {
-      margin-top: 10px;
-      margin-left: 5px;
-      height: 10px;
-      width: 20%;
-      background: #cb5a5e;
+
+    .letter-text span,
+    .letter-text p {
+      color: #cb5a5e;
+      font-weight: 500;
     }
 
     .letter-stamp {
-      margin-top: 30px;
-      margin-left: 120px;
+      margin-top: calc(10px * var(--letter-scale));
+      margin-left: calc(120px * var(--letter-scale));
       border-radius: 100%;
-      height: 30px;
-      width: 30px;
+      height: calc(30px * var(--letter-scale));
+      width: calc(30px * var(--letter-scale));
       background: #cb5a5e;
       opacity: 0.3;
     }
@@ -226,21 +254,17 @@ export default {
 }
 
 .shadow {
-  position: absolute;
-  top: 200px;
+  position: relative;
+  top: calc(200px * var(--letter-scale));
   left: 50%;
-  width: 400px;
-  height: 30px;
+  width: calc(220px * var(--letter-scale));
+  height: calc(30px * var(--letter-scale));
   transition: 0.4s;
   transform: translateX(-50%);
-  -webkit-transition: 0.4s;
-  -webkit-transform: translateX(-50%);
-  -moz-transition: 0.4s;
-  -moz-transform: translateX(-50%);
 
   border-radius: 100%;
   background: radial-gradient(
-    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.4),
     rgba(0, 0, 0, 0),
     rgba(0, 0, 0, 0)
   );
@@ -248,27 +272,21 @@ export default {
 
 .letter-image:hover {
   .animated-mail {
-    transform: translateY(50px);
-    -webkit-transform: translateY(50px);
-    -moz-transform: translateY(50px);
+    transform: translateY(calc(50px * var(--letter-scale)));
   }
 
   .animated-mail .top-fold {
     transition: transform 0.4s, z-index 0.2s;
     transform: rotateX(180deg);
-    -webkit-transition: transform 0.4s, z-index 0.2s;
-    -webkit-transform: rotateX(180deg);
-    -moz-transition: transform 0.4s, z-index 0.2s;
-    -moz-transform: rotateX(180deg);
     z-index: 0;
   }
 
   .animated-mail .letter {
-    height: 180px;
+    height: calc(180px * var(--letter-scale));
   }
 
   .shadow {
-    width: 250px;
+    width: calc(150px * var(--letter-scale));
   }
 }
 </style>
