@@ -101,23 +101,26 @@ export default {
 </script>
 
 <template>
-  <div class="body" :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }">
+  <div
+    class="body"
+    :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }"
+  >
     <div class="title">
       <div>
-        <span>FLOATING FANTASY</span>
-        <p>浮 生 幻 景</p>
+        <h1>FLOATING FANTASY</h1>
+        <h1>浮 生 幻 景</h1>
       </div>
     </div>
     <div class="content">
       <div class="name-content">
         <div class="motto">
           <div>
-            <div>這句話，是李貞慧老師的座右銘。</div>
-            <div>This sentence is the motto of Teacher Li Chen-hui.</div>
+            <h2>這句話，是李貞慧老師的座右銘。</h2>
+            <h2>This sentence is the motto of Teacher Li Chen-hui.</h2>
           </div>
         </div>
         <div class="name">
-          <span>作者</span>
+          <p>作者</p>
           <p>李貞慧 <span>Lee Chen-Huei</span></p>
         </div>
       </div>
@@ -132,18 +135,29 @@ export default {
 <style scoped>
 .body {
   display: flex;
-  padding: 10vh 10% 10vh 0;
-  padding-top: 10vh;
+  padding: var(--logo-padding-top) 10% var(--logo-padding-top) 0;
   flex-direction: column;
 }
 
 .title {
-  font-size: var(--font-second-size);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: start;
   color: #fff;
+}
+
+.title div h1 {
+  font-family: "Playfair Display" !important;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.title div h1:last-child {
+  color: #c9a063;
+  font-weight: 600;
+  letter-spacing: 5px;
 }
 
 .title::before {
@@ -153,6 +167,7 @@ export default {
   width: 55px;
   height: 2px;
   background: #fff;
+  margin-right: 10px;
 }
 
 @media (max-width: 950px) {

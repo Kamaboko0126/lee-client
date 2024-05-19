@@ -17,7 +17,7 @@ export default {
   <div class="information-content">
     <div class="horizontal-menu">
       <div class="title">
-        <p>簡歷</p>
+        <h2>簡歷</h2>
       </div>
       <div class="menu-items">
         <div class="menu-item" v-for="item in menuItems" :key="item.id">
@@ -64,11 +64,12 @@ export default {
 .title::before {
   content: "";
   width: 55px;
-  height: 2px;
+  height: 1.5px;
   display: inline-block;
-  background: #4d4d4d;
+  background: #8d8c8c;
   top: 1px;
   position: relative;
+  margin-right: 10px;
 }
 
 .menu-items {
@@ -77,6 +78,10 @@ export default {
 
 .menu-item {
   cursor: pointer;
+}
+
+.menu-item p {
+  font-weight: 500;
 }
 
 .menu-item:not(:last-child) {
@@ -91,18 +96,12 @@ export default {
 .informations {
   padding: 0 10% 50px;
 }
-.information {
-  font-size: var(--font-main-size);
-}
-
-.value {
-  margin-bottom: 25px;
-}
 
 @media (max-width: 950px) {
   .menu-item:not(:last-child) {
     margin-right: 20px;
   }
+
   .title::before {
     width: 45px;
   }

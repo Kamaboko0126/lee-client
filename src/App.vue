@@ -16,7 +16,7 @@ export default {
     document.title = "浮生幻景";
 
     //for all pages
-    const isLoading = ref(false);
+    const isLoading = ref(true);
     provide("isLoading", isLoading);
 
     //for all pages
@@ -62,7 +62,7 @@ export default {
   --main-color: #3e3a39;
 
   --font-main-size: 15px;
-  
+
   --title-main-size: 32px;
   --title-second-size: 18px;
   --title-third-size: 28px;
@@ -70,7 +70,7 @@ export default {
   --font-fourth-size: 17px;
 
   --leftitem-width: 75px;
-  
+
   --logo-padding-top: 70px;
   --logo-padding-left: 100px;
   --logo-padding-second: 0 0 70px 130px;
@@ -85,7 +85,6 @@ export default {
 @media (max-width: 950px) {
   :root {
     --font-main-size: 15px;
-
 
     --leftitem-width: 0px;
 
@@ -104,18 +103,21 @@ export default {
     --font-main-size: 15px;
 
     --leftitem-width: 0px;
-    
+
     --logo-padding-top: 80px;
     --logo-padding-left: 40px;
     --logo-padding-second: 0 0 60px 50px;
-        
+
     --menuicon-position-right: 40px;
     --menu-icon-size: 40px;
     --menu-font-size: 30px;
   }
 }
 
-p,h1,h2,h3 {
+p,
+h1,
+h2,
+h3 {
   line-height: 2.4;
   font-size: var(--font-main-size);
   font-feature-settings: "palt" on;
@@ -128,18 +130,20 @@ p,h1,h2,h3 {
   unicode-bidi: isolate;
 }
 
-h1,h2,h3{
+h1,
+h2,
+h3 {
   font-size: var(--title-main-size);
   margin-block-start: 0;
   margin-block-end: 0;
   font-weight: 300;
 }
 
-h2{
+h2 {
   font-size: var(--title-second-size);
 }
 
-h3{
+h3 {
   font-size: var(--title-third-size);
 }
 

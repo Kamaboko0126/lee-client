@@ -55,12 +55,8 @@ export default {
 
     <div class="content">
       <div>
-        <p>
-          根據作品風格，將1987-2022，共計三十五年的創作生涯，分為三大階段：
-        </p>
-        <p>
-          第一階段：1987-1993 ／ 第二階段：1994-2010 ／ 第三階段：2011-2022
-        </p>
+        <p>根據作品風格，將1987-2022，共計三十五年的創作生涯，分為三大階段：</p>
+        <p>第一階段：1987-1993 ／ 第二階段：1994-2010 ／ 第三階段：2011-2022</p>
       </div>
     </div>
   </div>
@@ -76,12 +72,24 @@ export default {
 }
 
 .title {
-  font-size: var(--font-second-size);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: start;
   color: #fff;
+}
+
+.title div h1 {
+  font-family: "Playfair Display" !important;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.title div h1:last-child {
+  color: #c9a063;
+  font-weight: 600;
+  letter-spacing: 5px;
 }
 
 .title::before {
@@ -91,6 +99,7 @@ export default {
   width: 55px;
   height: 2px;
   background: #fff;
+  margin-right: 10px;
 }
 
 .content {
@@ -100,7 +109,7 @@ export default {
   flex-direction: column;
   color: #fff;
   font-size: var(--font-main-size);
-  padding: 20px 10%;
+  padding-top: var(--logo-padding-top);
 }
 
 .words {

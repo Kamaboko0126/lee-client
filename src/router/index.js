@@ -27,7 +27,11 @@ const router = createRouter({
       path: "/latestnews",
       name: "latestnews",
       component: () => import("@/components/LatestNews"),
-    },
+    },{
+      path:"/threestages",
+      name:"threestages",
+      component:()=>import("@/components/ArtworkAppreciation/ThreeStages")
+    }
   ],
 });
 

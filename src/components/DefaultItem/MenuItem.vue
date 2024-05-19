@@ -11,19 +11,11 @@ export default {
     const isLoading = inject("isLoading");
 
     const menus = ref([
-      {
-        name: "浮生幻景",
-        path: "/",
-        markers: [],
-      },
-      {
-        name: "作品賞析",
-        path: "/artworkappreciation",
-        markers: ["第一期", "第二期", "第三期", "第四期"],
-      },
-      { name: "藝術家介紹", path: "/artistintroduction" },
-      { name: "互動專區", path: "/interactivezone" },
-      { name: "動態消息", path: "/latestnews" },
+      { name: "浮生幻景", url: "/" },
+      { name: "作品賞析", url: "/artworkappreciation" },
+      { name: "藝術家介紹", url: "/artistintroduction" },
+      { name: "互動專區", url: "/interactivezone" },
+      { name: "動態消息", url: "/latestnews" },
     ]);
 
     //click menu icon && setting menu animation
@@ -86,22 +78,11 @@ export default {
         <h3>- Eastern Gouache art of Lee Chen-huei -</h3>
       </div>
       <div class="menu-items">
-        <router-link
-          class="menu-item"
-          v-for="menu in menus"
-          :key="menu.id"
-          :to="menu.path"
-          @click="clickMenuItem"
-        >
-          <div class="item-p">
-            {{ menu.name }}
-          </div>
-          <div class="markers">
-            <div v-for="marker in menu.markers" :key="marker.id" class="marker">
-              <p>{{ marker }}</p>
-            </div>
-          </div>
-        </router-link>
+        <div class="menu-item" v-for="menu in menus" :key="menu.id">
+          <router-link :to="menu.url" @click="clickMenuItem">
+            <h1 class="item-p">{{ menu.name }}</h1>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -176,7 +157,7 @@ i:hover {
   padding-left: var(--logo-padding-left);
 }
 
-.logo h1{
+.logo h1 {
   font-family: "Playfair Display" !important;
   font-weight: 500;
   letter-spacing: 0;
@@ -196,82 +177,59 @@ i:hover {
   height: calc(100vh - var(--logo-height));
   overflow: auto;
   display: flex;
-  align-items: flex-start;
+  align-items: space-between;
   justify-content: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: var(--logo-padding-top) 0 var(--logo-padding-top)
+  padding: var(--logo-padding-top) 0 calc(var(--logo-padding-top) * 1.5)
     var(--logo-padding-left);
 }
 
+a {
+  display: inline-block;
+}
+
 .menu-item {
-  padding: 40px 50px 40px 0;
+  /* padding: 40px 50px 40px 0; */
   flex-shrink: 0;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 950px) {
   .menu-items {
     flex-wrap: nowrap;
-    padding: calc(var(--logo-padding-top) - 30px) 0
-      calc(var(--logo-padding-top) - 30px) 0;
+    padding: calc(var(--logo-padding-top) - 30px) 0 0 0;
     align-items: center;
-  }
-
-  .menu-item {
-    padding: 10px 0 10px 0;
   }
 }
 
-.item-p,
-.marker p {
-  font-size: var(--menu-font-size);
-  font-weight: 600;
+.item-p {
   color: #c9a063;
+  font-weight: 500;
   cursor: pointer;
   position: relative;
   transition: 0.4s ease-in-out;
   text-decoration: none;
   flex-shrink: 0;
+  line-height: 2;
 }
 
-.marker p {
-  font-size: var(--menu-second-font-size);
-  display: inline-block;
-}
-
-.markers {
-  padding-top: 20px;
-}
-
-@media (max-width: 950px) {
-  .markers {
-    display: none;
-  }
-}
-
-.marker {
-  padding: 10px 0;
-}
-
-.item-p:hover,
-.marker p:hover {
+.item-p:hover {
   transform: scale(1.1);
 }
 
-.item-p::after,
-.marker p::after {
+.item-p::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 30%;
-  height: 1px;
+  height: 2px;
   background: #fff;
   transition: 0.4s ease-in-out;
 }
 
-.item-p:hover::after,
-.marker p:hover::after {
+.item-p:hover::after {
   width: 100%;
 }
 
@@ -285,7 +243,9 @@ i:hover {
 
 @keyframes expand {
   0% {
-    clip-path: circle(0% at calc(100% - var(--menuicon-position-right) - 35px) calc(130px));
+    clip-path: circle(
+      0% at calc(100% - var(--menuicon-position-right) - 35px) calc(130px)
+    );
   }
   100% {
     clip-path: circle(
@@ -301,7 +261,9 @@ i:hover {
     );
   }
   100% {
-    clip-path: circle(0% at calc(100% - var(--menuicon-position-right) - 35px) calc(120px));
+    clip-path: circle(
+      0% at calc(100% - var(--menuicon-position-right) - 35px) calc(120px)
+    );
   }
 }
 </style>
