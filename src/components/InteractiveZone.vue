@@ -4,10 +4,11 @@ import { useClipboard } from "@vueuse/core";
 
 export default {
   setup() {
-    onMounted(() => {
-      const isLoading = inject("isLoading");
-      const showMenu = inject("showMenu");
+    const isMobile = inject("isMobile");
+    const isLoading = inject("isLoading");
+    const showMenu = inject("showMenu");
 
+    onMounted(() => {
       isLoading.value = false;
       showMenu.value = true;
     });
@@ -28,6 +29,7 @@ export default {
       copy,
       copied,
       isSupported,
+      isMobile,
     };
   },
 };
@@ -45,7 +47,7 @@ export default {
 
   <h2>Contact us!</h2>
   <div class="content">
-    <div class="letter-image">
+    <div class="letter-image" :class="{ mobile: isMobile }">
       <div class="animated-mail">
         <div class="back-fold"></div>
         <div class="letter">
@@ -144,6 +146,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+  padding-bottom: 60px;
 }
 
 .letter-image {
@@ -270,7 +273,7 @@ h2 {
   );
 }
 
-.letter-image:hover {
+.letter-image:hover, .letter-image.mobile {
   .animated-mail {
     transform: translateY(calc(50px * var(--letter-scale)));
   }

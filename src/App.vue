@@ -26,9 +26,14 @@ export default {
     const showMenu = ref(false);
     provide("showMenu", showMenu);
 
+    //for all pages
+    const isMobile = ref();
+    provide("isMobile", isMobile);
+
     return {
       isLoading,
       showMenu,
+      isMobile,
     };
   },
 };
@@ -45,7 +50,9 @@ export default {
       <router-view />
     </div>
   </div>
-  <FooterItem />
+  <div class="footer">
+    <FooterItem />
+  </div>
 </template>
 
 <style>
@@ -90,6 +97,9 @@ export default {
 
     --leftitem-width: 0px;
 
+    --title-main-size: 30px;
+    --title-third-size: 26px;
+
     --menuicon-position-right: 70px;
     --menu-icon-size: 50px;
     --menu-font-size: 35px;
@@ -107,6 +117,9 @@ export default {
 
     --leftitem-width: 0px;
 
+    --title-main-size: 24px;
+    --title-third-size: 21px;
+
     --logo-padding-top: 80px;
     --logo-padding-left: 40px;
     --logo-padding-second: 0 0 60px 50px;
@@ -114,7 +127,7 @@ export default {
     --menuicon-position-right: 40px;
     --menu-icon-size: 40px;
     --menu-font-size: 30px;
-    --letter-scale: 1.5;
+    --letter-scale: 1.65;
   }
 }
 
@@ -153,6 +166,7 @@ h3 {
 
 .main {
   display: flex;
+  min-height: 100vh;
 }
 
 .left {
@@ -161,6 +175,13 @@ h3 {
 
 .right {
   width: calc(100% - var(--leftitem-width));
+}
+
+.footer {
+  position: relative;
+  left: var(--leftitem-width);
+  width: calc(100% - var(--leftitem-width));
+  overflow-x: hidden;
 }
 
 button {

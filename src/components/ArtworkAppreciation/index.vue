@@ -12,11 +12,18 @@ export default {
     const showMenu = inject("showMenu");
     const isLoading = inject("isLoading");
 
+    const isMobile = inject("isMobile");
+
     onMounted(() => {
       isLoading.value = true;
       showMenu.value = false;
 
-      let images = [require("@/assets/artist.jpg")];
+      let images = [
+        require("@/assets/banner-2.jpg"),
+        require("@/assets/artwork/家.png"),
+        require("@/assets/artwork/樹洞.jpg"),
+        require("@/assets/artwork/芳草.jpg"),
+      ];
 
       let loadImages = images.map((image) => {
         return new Promise((resolve, reject) => {
@@ -39,13 +46,18 @@ export default {
         });
     });
 
-    return {};
+    return {
+      isMobile,
+    };
   },
 };
 </script>
 
 <template>
-  <div class="header">
+  <div
+    class="header"
+    :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }"
+  >
     <div class="title">
       <div>
         <h1>FLOATING FANTASY</h1>
@@ -109,7 +121,6 @@ export default {
   flex-direction: column;
   color: #fff;
   font-size: var(--font-main-size);
-  padding-top: var(--logo-padding-top);
+  padding: var(--logo-padding-top) 15px 0 15px;
 }
-
 </style>

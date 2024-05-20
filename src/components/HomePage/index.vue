@@ -45,7 +45,10 @@ export default {
 <template>
   <banner-item></banner-item>
   <div class="section-content">
-    <div class="section-left" :style="{ backgroundImage: `url(${require('@/assets/1213.png')})` }">
+    <div
+      class="section-left"
+      :style="{ backgroundImage: `url(${require('@/assets/1213.png')})` }"
+    >
       <div class="texts">
         <h1>About<span>展覽理念</span></h1>
         <h1>Exhibition concept</h1>
@@ -127,8 +130,9 @@ export default {
     width: 100%;
   }
 
-  .section-right img {
-    overflow-x: hidden;
+  .section-right img,
+  .section-right {
+    overflow: hidden;
     height: 50vh;
   }
 }

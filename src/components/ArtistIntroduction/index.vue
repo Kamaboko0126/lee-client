@@ -70,7 +70,7 @@ export default {
       isLoading.value = true;
       showMenu.value = false;
 
-      let images = [require("@/assets/artist.jpg")];
+      let images = [require("@/assets/artist.jpg"),require('@/assets/banner-2.jpg')];
 
       let loadImages = images.map((image) => {
         return new Promise((resolve, reject) => {

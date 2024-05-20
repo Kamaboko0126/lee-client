@@ -12,18 +12,23 @@ export default {
       {
         date: "2021-09-01",
         value: "1987 東海大學美術系文學士",
+        url: "",
       },
       {
         date: "2021-09-01",
         value: "1987 東海大學美術系文學士",
-      },{
-        date: "2021-09-01",
-        value:"1987 東海大學美術系文學士",
+        url: "",
       },
       {
         date: "2021-09-01",
-        value:"1987 東海大學美術系文學士",
-      }
+        value: "1987 東海大學美術系文學士",
+        url: "",
+      },
+      {
+        date: "2021-09-01",
+        value: "1987 東海大學美術系文學士",
+        url: "",
+      },
     ];
 
     onMounted(() => {
@@ -74,7 +79,12 @@ export default {
   </div>
   <div class="informations">
     <div class="information" v-for="data in newsData" :key="data.id">
-      <p class="value">{{ data.date }}</p>
+      <a :href="data.url">
+        <p class="value">
+          <span>{{ data.date + "," }}</span
+          ><span>{{ data.value }}</span>
+        </p>
+      </a>
     </div>
   </div>
 </template>
@@ -140,7 +150,13 @@ export default {
   padding: 0 10% 50px;
 }
 
-.information p {
+.information p,
+.information a {
+  color: #000;
   font-weight: 400;
+}
+
+.value span:last-child {
+  margin-left: 15px;
 }
 </style>

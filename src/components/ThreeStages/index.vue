@@ -1,11 +1,14 @@
 <script>
 /* eslint-disable no-irregular-whitespace */
-import { onMounted, inject, ref, computed } from "vue";
+import { onMounted, inject, ref, provide } from "vue";
 import { useRoute } from "vue-router";
+import CardItem from "../ThreeStages/CardItem.vue";
 
 export default {
   name: "ArtworkAppreciation",
-  components: {},
+  components: {
+    CardItem,
+  },
   setup() {
     const showMenu = inject("showMenu");
     const isLoading = inject("isLoading");
@@ -13,11 +16,11 @@ export default {
     const route = useRoute();
     const currentStage = ref(route.query.stage);
 
-    const filteredStagesData = computed(() => {
-      return stagesData.filter(
-        (stageData) => stageData.stage === currentStage.value
-      );
-    });
+    // const filteredStagesData = computed(() => {
+    //   return stagesData.filter(
+    //     (stageData) => stageData.stage === currentStage.value
+    //   );
+    // });
 
     const stagesData = [
       {
@@ -32,22 +35,22 @@ export default {
           },
           {
             name: "春山啼鳥",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/春山啼鳥.jpg"),
             url: "",
           },
           {
             name: "白樺",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/白樺.png"),
             url: "",
           },
           {
-            name: "根",
-            image: require("@/assets/artwork/家.png"),
+            name: "時光流逝(五)",
+            image: require("@/assets/artwork/時光流逝(五).png"),
             path: "",
           },
           {
             name: "寒林深秋",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/寒林深秋.jpg"),
             url: "",
           },
         ],
@@ -59,22 +62,22 @@ export default {
         artworks: [
           {
             name: "樹洞",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/樹洞.jpg"),
             url: "",
           },
           {
             name: "風的纏綿(二)",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/風的纏綿(二).png"),
             url: "",
           },
           {
             name: "風的纏綿(四)",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/風的纏綿(四).png"),
             url: "",
           },
           {
             name: "潸然",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/潸然.jpg"),
             url: "",
           },
         ],
@@ -86,32 +89,39 @@ export default {
         artworks: [
           {
             name: "芳草",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/芳草.jpg"),
             url: "",
           },
           {
             name: "穹影",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/穹影.jpg"),
             url: "",
           },
           {
             name: "長流",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/長流.png"),
             url: "",
           },
           {
             name: "夢河",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/夢河.png"),
             url: "",
           },
           {
             name: "默寞",
-            image: require("@/assets/artwork/家.png"),
+            image: require("@/assets/artwork/默寞.jpg"),
             url: "",
           },
         ],
       },
     ];
+
+    const filteredStagesData = stagesData.filter(
+      (stageData) => stageData.stage == currentStage.value
+    );
+    
+    
+    provide("filteredStagesData", filteredStagesData);
 
     onMounted(() => {
       isLoading.value = true;
@@ -166,6 +176,7 @@ export default {
       </div>
     </div>
   </div>
+  <CardItem />
 </template>
 
 <style scoped>
