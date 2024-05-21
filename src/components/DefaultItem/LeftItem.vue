@@ -54,8 +54,9 @@ export default {
   justify-content: flex-end;
   flex-direction: column;
   padding: 5vh 0;
-  box-shadow: 4px 0px 2px #efeeed;
+  box-shadow: 2px 0px 1px #efeeed;
   background: #fff;
+  z-index: 9999999999;
 }
 
 .content p {

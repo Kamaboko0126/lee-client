@@ -30,7 +30,12 @@ const router = createRouter({
     },{
       path:"/threestages",
       name:"threestages",
-      component:()=>import("@/components/ThreeStages/")
+      component:()=>import("@/components/ArtworkAppreciation/StageWork")
+    },
+    {
+      path:"/artwork",
+      name:"artwork",
+      component:()=>import("@/components/ArtworkAppreciation/ArtworkPage/")
     }
   ],
 });

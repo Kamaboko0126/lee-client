@@ -10,13 +10,7 @@ export default {
     const route = useRoute();
     const isLoading = inject("isLoading");
 
-    const menus = ref([
-      { name: "浮生幻景", url: "/" },
-      { name: "作品賞析", url: "/artworkappreciation" },
-      { name: "藝術家介紹", url: "/artistintroduction" },
-      { name: "互動專區", url: "/interactivezone" },
-      { name: "動態消息", url: "/latestnews" },
-    ]);
+    const menus = inject("menus");
 
     //click menu icon && setting menu animation
     const clickMenu = () => {
