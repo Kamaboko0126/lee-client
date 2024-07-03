@@ -10,24 +10,29 @@ export default {
 
     const newsData = [
       {
-        date: "2021-09-01",
-        value: "1987 東海大學美術系文學士",
-        url: "",
+        date: "2024.07.11 - 2024.09.02",
+        value: "微光心影—李貞慧膠彩創作",
+        url: "https://www.artspots-taichung.com.tw/tw/index.asp?au_id=22&sub_id=50&id=7364",
       },
       {
-        date: "2021-09-01",
-        value: "1987 東海大學美術系文學士",
-        url: "",
+        date: "2022.10.21 - 2022.11.20",
+        value: "浮光幻景—李貞慧膠彩藝術展",
+        url: "https://kamaboko0126.github.io/lee-client/#/",
       },
       {
-        date: "2021-09-01",
-        value: "1987 東海大學美術系文學士",
-        url: "",
+        date: "2022.10.15 - 2022.12.15",
+        value: "生成",
+        url: "https://ymspring.com.tw/2142/art-gallery/%E5%B1%95%E8%A6%BD%E4%B8%BB%E9%A1%8C%E3%80%90%E7%94%9F%E6%88%90%E3%80%91/",
       },
       {
-        date: "2021-09-01",
-        value: "1987 東海大學美術系文學士",
-        url: "",
+        date: "2022.03.31 - 2022.05.01",
+        value: "時‧光景—李貞慧創作個展",
+        url: "https://imedia.culture.tw/channel/chcsec/zh_tw/media/131368",
+      },
+      {
+        date: "2006.04.20 - 2006.05.25",
+        value: "天地優遊—李貞慧膠彩個展",
+        url: "http://art.lib.pu.edu.tw/2006-04-20/index.htm",
       },
     ];
 
@@ -79,9 +84,9 @@ export default {
   </div>
   <div class="informations">
     <div class="information" v-for="data in newsData" :key="data.id">
-      <a :href="data.url">
+      <a :href="data.url" target="blank">
         <p class="value">
-          <span>{{ data.date + "," }}</span
+          <span>{{ data.date }}</span
           ><span>{{ data.value }}</span>
         </p>
       </a>
@@ -150,10 +155,14 @@ export default {
   padding: 0 10% 50px;
 }
 
-.information p,
+.information a p,
 .information a {
   color: #000;
-  font-weight: 400;
+  font-weight: 300;
+}
+
+.value span {
+  font-weight: 300;
 }
 
 .value span:last-child {

@@ -52,17 +52,17 @@ export default {
         <div class="back-fold"></div>
         <div class="letter">
           <div class="letter-border"></div>
-          <div class="letter-text" @click="copy('aaa123@gmail.com')">
+          <div class="letter-text" @click="copy('chlee@thu.edu.tw')">
             <p>
-              <span v-if="!copied['aaa123@gmail.com']"
-                >Email: aaa123@gmail.com</span
+              <span v-if="!copied['chlee@thu.edu.tw']"
+                >Email: chlee@thu.edu.tw</span
               >
               <span v-else>Email: Copied!</span>
             </p>
           </div>
-          <div class="letter-text" @click="copy('0912345678')">
+          <div class="letter-text" @click="copy('04-23590121#38612')">
             <p>
-              <span v-if="!copied['0912345678']">Phone: 09-1234-5678</span>
+              <span v-if="!copied['04-23590121#38612']">Phone: 04-23590121#38612</span>
               <span v-else>Phone: Copied!</span>
             </p>
           </div>

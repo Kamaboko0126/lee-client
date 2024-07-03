@@ -24,8 +24,20 @@
   margin-left: -2.7em;
   width: 5.4em;
   height: 5.4em;
-  background:var(--main-color);
+  background: var(--main-color);
   transform: scale(3);
+}
+
+@media (max-width: 700px) {
+  #loader {
+    transform: scale(2);
+  }
+}
+
+@media (max-width: 500px) {
+  #loader {
+    transform: scale(1.5);
+  }
 }
 
 #hill {
@@ -45,7 +57,7 @@
   width: 7.1em;
   height: 7.1em;
   left: 0;
-  background:var(--main-color);
+  background: var(--main-color);
 }
 
 #box {

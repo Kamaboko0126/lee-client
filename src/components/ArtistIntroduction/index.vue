@@ -115,8 +115,8 @@ export default {
       <div class="name-content">
         <div class="motto">
           <div>
-            <h2>這句話，是李貞慧老師的座右銘。</h2>
-            <h2>This sentence is the motto of Teacher Li Chen-hui.</h2>
+            <h2>我天天在研究室種草！</h2>
+            <h2>I plant grass in the lab every day!</h2>
           </div>
         </div>
         <div class="name">
