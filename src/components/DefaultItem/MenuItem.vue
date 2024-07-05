@@ -8,7 +8,6 @@ export default {
     const isMenuOpen = inject("isMenuOpen");
     const isAnimating = ref(false);
     const route = useRoute();
-    const isLoading = inject("isLoading");
 
     const menus = inject("menus");
 
@@ -33,7 +32,6 @@ export default {
       () => route.path,
       () => {
         window.scrollTo(0, 0);
-        isLoading.value = true;
       }
     );
 
@@ -76,6 +74,15 @@ export default {
           <router-link :to="menu.url" @click="clickMenuItem">
             <h1 class="item-p">{{ menu.name }}</h1>
           </router-link>
+          <div
+            class="menu-markers"
+            v-for="marker in menu.markers"
+            :key="marker.id"
+          >
+            <router-link :to="marker.url" @click="clickMenuItem">
+              <h2 class="item-p">{{ marker.name }}</h2>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -206,6 +213,22 @@ a {
   text-decoration: none;
   flex-shrink: 0;
   line-height: 2;
+}
+
+h2.item-p {
+  margin: 8px 10px;
+}
+
+@media (max-width: 950px) {
+  h2.item-p {
+    margin: 8px 0;
+    text-align: center;
+  }
+  .menu-markers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .item-p:hover {

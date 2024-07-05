@@ -5,11 +5,9 @@ import { useClipboard } from "@vueuse/core";
 export default {
   setup() {
     const isMobile = inject("isMobile");
-    const isLoading = inject("isLoading");
-    const showMenu = inject("showMenu");
 
     onMounted(() => {
-      isLoading.value = false;
+      const showMenu = inject("showMenu");
       showMenu.value = true;
     });
 
@@ -62,7 +60,9 @@ export default {
           </div>
           <div class="letter-text" @click="copy('04-23590121#38612')">
             <p>
-              <span v-if="!copied['04-23590121#38612']">Phone: 04-23590121#38612</span>
+              <span v-if="!copied['04-23590121#38612']"
+                >Phone: 04-23590121#38612</span
+              >
               <span v-else>Phone: Copied!</span>
             </p>
           </div>
@@ -273,7 +273,8 @@ h2 {
   );
 }
 
-.letter-image:hover, .letter-image.mobile {
+.letter-image:hover,
+.letter-image.mobile {
   .animated-mail {
     transform: translateY(calc(50px * var(--letter-scale)));
   }

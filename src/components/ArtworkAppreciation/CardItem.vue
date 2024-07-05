@@ -1,27 +1,10 @@
 <script>
-import { inject, ref } from "vue";
+import { inject } from "vue";
 
 export default {
   setup() {
     const isMobile = inject("isMobile");
-
-    const stages = ref([
-      {
-        name: "第一階段(1987-1993)：構圖與顏色的遊戲",
-        image: require("@/assets/artwork/寒林深秋.jpg"),
-        url: "/threestages?stage=first",
-      },
-      {
-        name: "第二階段(1994-2008)：生之舞曲",
-        image: require("@/assets/artwork/風的纏綿(二).png"),
-        url: "/threestages?stage=second",
-      },
-      {
-        name: "第三階段(2011-2022)：卻說天涼好個秋",
-        image: require("@/assets/artwork/默寞.jpg"),
-        url: "/threestages?stage=third",
-      },
-    ]);
+    const stages = inject("stages");
 
     return {
       stages,

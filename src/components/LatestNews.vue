@@ -5,19 +5,19 @@ export default {
   name: "ArtworkAppreciation",
   components: {},
   setup() {
-    const showMenu = inject("showMenu");
-    const isLoading = inject("isLoading");
-
     const newsData = [
       {
         date: "2024.07.11 - 2024.09.02",
         value: "微光心影—李貞慧膠彩創作",
-        url: "https://www.artspots-taichung.com.tw/tw/index.asp?au_id=22&sub_id=50&id=7364",
+        url: "https://www.artspots-taichung.com.tw/tw/news-detail/163",
+      },
+      {
+        date: "2023.10.14 - 2023.11.15",
+        value: "夢中繁華—李貞慧個展",
       },
       {
         date: "2022.10.21 - 2022.11.20",
         value: "浮光幻景—李貞慧膠彩藝術展",
-        url: "https://kamaboko0126.github.io/lee-client/#/",
       },
       {
         date: "2022.10.15 - 2022.12.15",
@@ -37,30 +37,8 @@ export default {
     ];
 
     onMounted(() => {
-      isLoading.value = true;
-      showMenu.value = false;
-
-      let images = [require("@/assets/artist.jpg")];
-
-      let loadImages = images.map((image) => {
-        return new Promise((resolve, reject) => {
-          let img = new Image();
-          img.src = image;
-          img.onload = () => resolve(img);
-          img.onerror = reject;
-        });
-      });
-
-      Promise.all(loadImages)
-        .then(() => {
-          setTimeout(() => {
-            isLoading.value = false;
-            showMenu.value = true;
-          }, 1500);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      const showMenu = inject("showMenu");
+      showMenu.value = true;
     });
 
     return {
@@ -85,10 +63,10 @@ export default {
   <div class="informations">
     <div class="information" v-for="data in newsData" :key="data.id">
       <a :href="data.url" target="blank">
-        <p class="value">
-          <span>{{ data.date }}</span
-          ><span>{{ data.value }}</span>
-        </p>
+        <div class="value">
+          <p>{{ data.date }}</p>
+          <p>{{ data.value }}</p>
+        </div>
       </a>
     </div>
   </div>
@@ -161,11 +139,34 @@ export default {
   font-weight: 300;
 }
 
-.value span {
+.value {
+  display: flex;
+}
+
+.value p {
   font-weight: 300;
 }
 
-.value span:last-child {
+.value p:last-child {
   margin-left: 15px;
+}
+
+@media (max-width: 600px) {
+  .value {
+    flex-direction: column;
+    display: inline-block;
+  }
+
+  .value p {
+    line-height: 1;
+  }
+
+  .information {
+    margin-top: 20px;
+  }
+
+  .value p:last-child {
+    margin-left: 0;
+  }
 }
 </style>

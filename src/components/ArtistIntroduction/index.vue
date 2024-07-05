@@ -1,16 +1,19 @@
 <script>
-import { onMounted, inject, provide } from "vue";
+import { onMounted, inject, provide, ref } from "vue";
 import InformationMenu from "./InformationMenu.vue";
+import LoaderItem from "../DefaultItem/LoaderItem.vue"; // 導入 LoaderItem 組件
+
 export default {
   name: "ArtistIntroduction",
   components: {
     InformationMenu,
+    LoaderItem,
   },
   setup() {
-    const isLoading = inject("isLoading");
     const showMenu = inject("showMenu");
+    const isLoading = ref(true);
 
-    const menuItems = [
+    const introductionList = [
       {
         name: "學歷",
         value: [
@@ -23,9 +26,9 @@ export default {
         value: [
           "1987 東海大學美術系畢業、留校任助教",
           "1993 日本國立筑波大學藝術研究所碩士",
-          "　　 東海大學美術系兼任講師",
+          "1993 東海大學美術系兼任講師",
           "1994 東海大學美術系  專任講師（1994-1998）",
-          "　　 國立藝術學院(國立臺北藝術大學)美術系兼任講師（1994-1998）",
+          "1994 國立藝術學院(國立臺北藝術大學)美術系兼任講師（1994-1998）",
           "1998 東海大學美術系  專任副教授（1998-2017）",
           "2004 東海大學美術系  系所主任（2004-2007）",
           "2007 東海大學美術系  學士學分班班主任（2007-迄今）",
@@ -38,7 +41,7 @@ export default {
         name: "研究 / 個展 / 作品集",
         value: [
           "1993〈日本画と中国画に関する研究－屏風、障屏様式の考察〉",
-          "　　《芸術研究科修士論文梗概集 1992》(筑波大学大学院修士課程芸術研究科 出版)",
+          "1993《芸術研究科修士論文梗概集 1992》(筑波大学大学院修士課程芸術研究科 出版)",
           "1993《李貞慧畫展》(日本 筑波市 廣瀨畫廊)",
           "1994《李貞慧膠彩畫作展》(臺中市立文化中心/東海大學藝術中心)",
           "1997《幻遊之境—李貞慧個展》(東海大學藝術中心)",
@@ -64,47 +67,44 @@ export default {
         ],
       },
     ];
-    provide("menuItems", menuItems);
+    provide("introductionList", introductionList);
+
+    const backgroundImg = ref(require("@/assets/banner-2.jpg"));
+    const artistImg = require("@/assets/lee(artist).jpg");
+
+    const imagePaths = [backgroundImg.value, artistImg];
+
+    const loadImage = (src) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(src);
+      });
+    };
+
+    const loadAllImages = (paths) => {
+      return Promise.all(paths.map((path) => loadImage(path)));
+    };
 
     onMounted(() => {
-      isLoading.value = true;
-      showMenu.value = false;
-
-      let images = [require("@/assets/artist.jpg"),require('@/assets/banner-2.jpg')];
-
-      let loadImages = images.map((image) => {
-        return new Promise((resolve, reject) => {
-          let img = new Image();
-          img.src = image;
-          img.onload = () => resolve(img);
-          img.onerror = reject;
-        });
+      loadAllImages(imagePaths).then(() => {
+        isLoading.value = false;
+        showMenu.value = true;
       });
-
-      Promise.all(loadImages)
-        .then(() => {
-          setTimeout(() => {
-            isLoading.value = false;
-            showMenu.value = true;
-          }, 1500);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     });
 
     return {
-      menuItems,
+      isLoading,
+      backgroundImg,
+      artistImg,
     };
   },
 };
 </script>
 
 <template>
-  <div
-    class="header"
-    :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }"
-  >
+  <LoaderItem v-if="isLoading" />
+  <div class="header" :style="{ backgroundImage: `url(${backgroundImg})` }">
     <div class="title">
       <div>
         <h1>FLOATING FANTASY</h1>
@@ -115,17 +115,17 @@ export default {
       <div class="name-content">
         <div class="motto">
           <div>
-            <h2>我天天在研究室種草！</h2>
-            <h2>I plant grass in the lab every day!</h2>
+            <h2>我天天在畫室種草！</h2>
+            <h2>I plant grass in the studio every day!</h2>
           </div>
         </div>
         <div class="name">
           <p>作者</p>
-          <p>李貞慧 <span>Lee Chen-Huei</span></p>
+          <p>李貞慧 <span>Lee Chen Huei</span></p>
         </div>
       </div>
       <div class="img-content">
-        <img :src="require('@/assets/artist.jpg')" />
+        <img :src="artistImg" />
       </div>
     </div>
   </div>
@@ -137,6 +137,8 @@ export default {
   display: flex;
   padding: var(--logo-padding-top) 10% var(--logo-padding-top) 0;
   flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .title {
@@ -173,6 +175,9 @@ export default {
 @media (max-width: 950px) {
   .title::before {
     width: 45px;
+  }
+  .header {
+    padding: var(--logo-padding-top) 5% var(--logo-padding-top) 5%;
   }
 }
 

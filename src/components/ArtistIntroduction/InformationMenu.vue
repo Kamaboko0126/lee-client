@@ -2,11 +2,11 @@
 import { inject, ref } from "vue";
 export default {
   setup() {
-    const menuItems = inject("menuItems");
+    const introductionList = inject("introductionList");
     const currentItem = ref("學歷");
 
     return {
-      menuItems,
+      introductionList,
       currentItem,
     };
   },
@@ -20,20 +20,20 @@ export default {
         <h2>簡歷</h2>
       </div>
       <div class="menu-items">
-        <div class="menu-item" v-for="item in menuItems" :key="item.id">
+        <div class="list" v-for="list in introductionList" :key="list.id">
           <p
-            @click="currentItem = item.name"
-            :class="currentItem == item.name ? 'current' : ''"
+            @click="currentItem = list.name"
+            :class="currentItem == list.name ? 'current' : ''"
           >
-            {{ item.name }}
+            {{ list.name }}
           </p>
         </div>
       </div>
     </div>
     <div class="informations">
-      <div class="information" v-for="item in menuItems" :key="item.id">
-        <div v-if="currentItem == item.name">
-          <div v-for="information in item.value" :key="information.id">
+      <div class="information" v-for="list in introductionList" :key="list.id">
+        <div v-if="currentItem == list.name">
+          <div v-for="information in list.value" :key="information.id">
             <p class="value">{{ information }}</p>
           </div>
         </div>
@@ -76,15 +76,15 @@ export default {
   display: flex;
 }
 
-.menu-item {
+.list {
   cursor: pointer;
 }
 
-.menu-item p {
+.list p {
   font-weight: 500;
 }
 
-.menu-item:not(:last-child) {
+.list:not(:last-child) {
   margin-right: 35px;
 }
 
@@ -102,7 +102,7 @@ export default {
 }
 
 @media (max-width: 950px) {
-  .menu-item:not(:last-child) {
+  .list:not(:last-child) {
     margin-right: 20px;
   }
 
@@ -112,7 +112,7 @@ export default {
 }
 
 @media (max-width: 500px) {
-  .menu-item:not(:last-child) {
+  .list:not(:last-child) {
     margin-right: 15px;
   }
 

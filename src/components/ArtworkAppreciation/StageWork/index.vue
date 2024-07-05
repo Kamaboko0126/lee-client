@@ -1,17 +1,19 @@
 <script>
 /* eslint-disable no-irregular-whitespace */
-import { onMounted, inject, ref, provide } from "vue";
+import { onMounted, inject, ref, provide, watch } from "vue";
 import { useRoute } from "vue-router";
 import CardItem from "./CardItem.vue";
+import LoaderItem from "../../DefaultItem/LoaderItem.vue"; // 導入 LoaderItem 組件
 
 export default {
   name: "StageWork",
   components: {
     CardItem,
+    LoaderItem,
   },
   setup() {
     const showMenu = inject("showMenu");
-    const isLoading = inject("isLoading");
+    const isLoading = ref(true);
     const stagesData = inject("stagesData");
 
     const route = useRoute();
@@ -20,55 +22,63 @@ export default {
 
     const currentStageData = ref();
 
-    // console.log(currentStage.value);
-    // console.log(stagesData);
-    currentStageData.value = stagesData.find(
-      (stageData) => stageData.stage === currentStage.value
+    // 更新 currentStageData 的函數
+    const updateCurrentStageData = () => {
+      isLoading.value = true;
+      currentStageData.value = stagesData.find(
+        (stageData) => stageData.stage === currentStage.value
+      );
+      provide("currentStageData", currentStageData);
+
+      const imagePaths = currentStageData.value.artworks.map(
+        (artwork) => artwork.image
+      );
+
+      const loadImage = (src) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => resolve(src);
+        });
+      };
+
+      const loadAllImages = (paths) => {
+        return Promise.all(paths.map((path) => loadImage(path)));
+      };
+
+      loadAllImages(imagePaths).then(() => {
+        isLoading.value = false;
+        showMenu.value = true;
+      });
+    };
+
+    // 初始更新
+    updateCurrentStageData();
+
+    // 監聽 route.query.stage 的變化
+    watch(
+      () => route.query.stage,
+      (newStage) => {
+        currentStage.value = newStage;
+        updateCurrentStageData();
+      }
     );
 
-    provide("currentStageData", currentStageData);
-
-    // console.log(currentStageData.value);
-
     onMounted(() => {
-      isLoading.value = true;
       showMenu.value = false;
-      const images = [];
-
-      for (let i = 0; i < currentStageData.value.artworks.length; i++) {
-        images.push(currentStageData.value.artworks[i].image);
-      }
-
-      let loadImages = images.map((image) => {
-        return new Promise((resolve, reject) => {
-          let img = new Image();
-          img.src = image;
-          img.onload = () => resolve(img);
-          img.onerror = reject;
-        });
-      });
-
-      Promise.all(loadImages)
-        .then(() => {
-          setTimeout(() => {
-            isLoading.value = false;
-            showMenu.value = true;
-          }, 1500);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     });
 
     return {
       currentStageData,
+      isLoading,
     };
   },
 };
 </script>
 
 <template>
-  <div class="body">
+  <LoaderItem v-if="isLoading" />
+  <div class="body" v-else>
     <div class="title">
       <div>
         <h1>FLOATING FANTASY</h1>
@@ -78,18 +88,18 @@ export default {
 
     <div class="content">
       <div>
-        <p>{{ currentStageData.title }}</p>
-        <p>{{ currentStageData.introduction }}</p>
+        <h2>{{ currentStageData.title }}</h2>
+        <h2 v-html="currentStageData.introduction"></h2>
       </div>
     </div>
+    <CardItem />
   </div>
-  <CardItem />
 </template>
 
 <style scoped>
 .body {
   display: flex;
-  padding: 10vh 0 10vh 0;
+  padding: 10vh 0 0 0;
   flex-direction: column;
   background: var(--main-color);
 }
@@ -132,10 +142,10 @@ export default {
   flex-direction: column;
   color: #fff;
   font-size: var(--font-main-size);
-  padding: var(--logo-padding-top) 30px 0;
+  padding: var(--logo-padding-top) 50px;
 }
 
-.content p {
+.content h2 {
   max-width: 1200px;
 }
 
@@ -146,7 +156,7 @@ export default {
   padding: 0 0 30px 0;
 }
 
-.words p:not(:last-child) {
+.words h2:not(:last-child) {
   margin-right: 20px;
 }
 </style>

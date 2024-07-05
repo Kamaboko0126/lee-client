@@ -1,63 +1,80 @@
 <script>
 /* eslint-disable no-irregular-whitespace */
-import { onMounted, inject } from "vue";
+import { onMounted, inject, provide, ref } from "vue";
 import CardItem from "./CardItem.vue";
+import LoaderItem from "../DefaultItem/LoaderItem.vue"; // 導入 LoaderItem 組件
 
 export default {
   name: "ArtworkAppreciation",
   components: {
     CardItem,
+    LoaderItem,
   },
   setup() {
     const showMenu = inject("showMenu");
-    const isLoading = inject("isLoading");
+    const isLoading = ref(true);
 
     const isMobile = inject("isMobile");
 
-    onMounted(() => {
-      isLoading.value = true;
-      showMenu.value = false;
+    const stages = ref([
+      {
+        name: "第一階段(1987-1993)：構圖與顏色的遊戲",
+        image: require("@/assets/artwork/寒林深秋.jpg"),
+        url: "/threestages?stage=first",
+      },
+      {
+        name: "第二階段(1994-2008)：生之舞曲",
+        image: require("@/assets/artwork/風的纏綿(二).png"),
+        url: "/threestages?stage=second",
+      },
+      {
+        name: "第三階段(2011-2022)：卻說天涼好個秋",
+        image: require("@/assets/artwork/默寞.jpg"),
+        url: "/threestages?stage=third",
+      },
+    ]);
+    provide("stages", stages);
 
-      let images = [
-        require("@/assets/banner-2.jpg"),
-        require("@/assets/artwork/家.png"),
-        require("@/assets/artwork/樹洞.jpg"),
-        require("@/assets/artwork/芳草.jpg"),
-      ];
+    const backgroundImg = ref(require("@/assets/banner-2.jpg"));
 
-      let loadImages = images.map((image) => {
-        return new Promise((resolve, reject) => {
-          let img = new Image();
-          img.src = image;
-          img.onload = () => resolve(img);
-          img.onerror = reject;
-        });
+    const imagePaths = [backgroundImg.value];
+
+    stages.value.forEach((stage) => {
+      imagePaths.push(stage.image);
+    });
+
+    const loadImage = (src) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(src);
       });
+    };
 
-      Promise.all(loadImages)
-        .then(() => {
-          setTimeout(() => {
-            isLoading.value = false;
-            showMenu.value = true;
-          }, 1500);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    const loadAllImages = (paths) => {
+      return Promise.all(paths.map((path) => loadImage(path)));
+    };
+
+    onMounted(() => {
+      showMenu.value = false;
+      loadAllImages(imagePaths).then(() => {
+        isLoading.value = false;
+        showMenu.value = true;
+      });
     });
 
     return {
       isMobile,
+      isLoading,
+      backgroundImg,
     };
   },
 };
 </script>
 
 <template>
-  <div
-    class="header"
-    :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }"
-  >
+  <LoaderItem v-if="isLoading" />
+  <div class="header" :style="{ backgroundImage: `url(${backgroundImg})` }">
     <div class="title">
       <div>
         <h1>FLOATING FANTASY</h1>
@@ -67,8 +84,12 @@ export default {
 
     <div class="content">
       <div>
-        <p>根據作品風格，將1987-2022，共計三十五年的創作生涯，分為三大階段：</p>
-        <p>第一階段：1987-1993 ／ 第二階段：1994-2010 ／ 第三階段：2011-2022</p>
+        <h2>
+          李貞慧自1987-2022年間、長達三十五年的創作生涯中，作品風格可分為三大階段：
+        </h2>
+        <h2>
+          第一階段：1987-1993 ／ 第二階段：1994-2010 ／ 第三階段：2011-2022
+        </h2>
       </div>
     </div>
   </div>

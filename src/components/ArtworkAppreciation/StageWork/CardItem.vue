@@ -17,29 +17,36 @@ export default {
 </script>
 
 <template>
-  <div class="title">
-    <h2>作品賞析</h2>
-  </div>
-  <div class="cards-content">
-    <div class="cards" :class="{ mobile: isMobile }">
-      <div
-        class="card"
-        v-for="stageData in currentStageData"
-        :key="stageData.id"
-      >
-        <router-link
-          :to="'/artwork?stage=' + currentStage + '&name=' + stageData.name"
+  <div class="cards-body">
+    <div class="title">
+      <h2>作品賞析</h2>
+    </div>
+    <div class="cards-content">
+      <div class="cards" :class="{ mobile: isMobile }">
+        <div
+          class="card"
+          v-for="stageData in currentStageData"
+          :key="stageData.id"
         >
-          <img :src="stageData.image" />
-          <!-- eslint-disable-next-line no-irregular-whitespace -->
-          <p>{{ stageData.name + "　" + stageData.format }}</p>
-        </router-link>
+          <router-link
+            :to="'/artwork?stage=' + currentStage + '&name=' + stageData.name"
+          >
+            <img :src="stageData.image" />
+            <!-- eslint-disable-next-line no-irregular-whitespace -->
+            <p>{{ stageData.name + "　" + stageData.format }}</p>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.cards-body {
+  background: #fff;
+  padding-bottom: 10vh;
+}
+
 .title {
   display: flex;
   align-items: center;

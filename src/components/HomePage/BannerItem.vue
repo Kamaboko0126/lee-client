@@ -2,25 +2,13 @@
 import { inject } from "vue";
 export default {
   setup() {
-    const bannerLoaded = inject("bannerLoaded");
-    const bannerImg = require("@/assets/icon.png");
-    const homepageLoaded = inject("homepageLoaded");
-    const isLoading = inject("isLoading");
-    const showMenu = inject("showMenu");
-    const onLoad = () => {
-      if (!bannerLoaded.value) {
-        return;
-      }
-      setTimeout(() => {
-        homepageLoaded.value = true;
-        isLoading.value = false;
-        showMenu.value = true;
-      }, 3000);
-    };
+    // const bannerImg = require("@/assets/icon.png");
+    const bannerImg = inject("bannerImg");
+    const iconImg = inject("iconImg");
+
     return {
-      bannerLoaded,
       bannerImg,
-      onLoad,
+      iconImg,
     };
   },
 };
@@ -39,7 +27,7 @@ export default {
       <div class="bottom">
         <p class="rotated-text">Eastern Gouache art of Lee Chen-huei</p>
         <p class="vertical-text">李 貞 慧 膠 彩 藝 術</p>
-        <img :src="bannerImg" @load="onLoad" />
+        <img :src="iconImg" />
       </div>
     </div>
   </section>
@@ -51,7 +39,7 @@ export default {
             class="marquee-content"
             v-for="n in 3"
             :key="n"
-            :src="require('@/assets/banner.jpg')"
+            :src="bannerImg"
           />
         </div>
       </div>

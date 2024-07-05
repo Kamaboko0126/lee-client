@@ -1,75 +1,92 @@
 <script>
 import BannerItem from "./BannerItem.vue";
 import { inject, onMounted, provide, ref } from "vue";
+import LoaderItem from "../DefaultItem/LoaderItem.vue"; // 導入 LoaderItem 組件
+
 export default {
   name: "HomePage",
   components: {
     BannerItem,
+    LoaderItem,
   },
   setup() {
     const showMenu = inject("showMenu");
-    const isLoading = inject("isLoading");
+    const isLoading = ref(true);
 
-    const bannerLoaded = ref(true);
-    provide("bannerLoaded", bannerLoaded);
+    const backgroundImg = ref(require("@/assets/1213.png"));
+    const bannerImg = ref(require("@/assets/banner.jpg"));
+    provide("bannerImg", bannerImg);
+    const iconImg = ref(require("@/assets/icon.png"));
+    provide("iconImg", iconImg);
+    const artistImg = require("@/assets/lee(homepage).jpg");
 
-    const homepageLoaded = ref(false);
-    provide("homepageLoaded", homepageLoaded);
+    const imagePaths = [
+      backgroundImg.value,
+      bannerImg.value,
+      iconImg.value,
+      artistImg,
+    ];
 
-    const homepageImg = require("@/assets/homepage.jpg");
-
-    onMounted(() => {
-      isLoading.value = true;
-      showMenu.value = false;
-    });
-
-    const onImageLoad = () => {
-      if (!bannerLoaded.value) {
-        return;
-      }
-      setTimeout(() => {
-        showMenu.value = true;
-        isLoading.value = false;
-        homepageLoaded.value = true;
-      }, 3000);
+    const loadImage = (src) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(src);
+      });
     };
 
+    const loadAllImages = (paths) => {
+      return Promise.all(paths.map((path) => loadImage(path)));
+    };
+
+    onMounted(() => {
+      showMenu.value = false;
+      loadAllImages(imagePaths).then(() => {
+        isLoading.value = false;
+        showMenu.value = true;
+      });
+    });
+
     return {
-      homepageImg,
-      onImageLoad,
+      backgroundImg,
+      artistImg,
+      isLoading,
     };
   },
 };
 </script>
 
 <template>
-  <banner-item></banner-item>
-  <div class="section-content">
-    <div
-      class="section-left"
-      :style="{ backgroundImage: `url(${require('@/assets/1213.png')})` }"
-    >
-      <div class="texts">
-        <h1>About<span>展覽理念</span></h1>
-        <h1>Exhibition concept</h1>
-        <p>
-          藝術家李貞慧。<br />
-          永遠的母親、妻子、女兒。教授。創作者。<br />
-          柔軔如藤、昂揚似松。<br />
-          她追逐光影，調皮如精靈玩弄顏料；<br />
-          她感悟生命，內觀自省、悠然自得。<br />
-          其作品於一筆一畫間完成禪修般的頓悟，<br />
-          自成生命第三境界。
-        </p>
-        <router-link to="/artistintroduction" class="button"
-          >VIEW ALL</router-link
-        >
+  <LoaderItem v-if="isLoading" />
+  <template v-else>
+    <BannerItem />
+    <div class="section-content">
+      <div
+        class="section-left"
+        :style="{ backgroundImage: `url(${backgroundImg})` }"
+      >
+        <div class="texts">
+          <h1>李貞慧<span>Lee Chen Huei</span></h1>
+          <!-- <h1>Exhibition concept</h1> -->
+          <p>
+            藝術家李貞慧。<br />
+            永遠的母親、妻子、女兒。教授。創作者。<br />
+            柔軔如藤、昂揚似松。<br />
+            她追逐光影，調皮如精靈玩弄顏料；<br />
+            她感悟生命，內觀自省、悠然自得。<br />
+            其作品於一筆一畫間完成禪修般的頓悟，<br />
+            自成生命第三境界。(文/游惠遠)
+          </p>
+          <router-link to="/artistintroduction" class="button"
+            >VIEW ALL</router-link
+          >
+        </div>
+      </div>
+      <div class="section-right">
+        <img :src="artistImg" />
       </div>
     </div>
-    <div class="section-right">
-      <img :src="homepageImg" @load="onImageLoad" />
-    </div>
-  </div>
+  </template>
 </template>
 
 <style scoped>

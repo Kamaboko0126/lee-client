@@ -2,13 +2,16 @@
 /* eslint-disable no-irregular-whitespace */
 import { onMounted, inject, ref } from "vue";
 import { useRoute } from "vue-router";
+import LoaderItem from "../../DefaultItem/LoaderItem.vue"; // 導入 LoaderItem 組件
 
 export default {
   name: "ArtworkPage",
-  components: {},
+  components: {
+    LoaderItem,
+  },
   setup() {
     const showMenu = inject("showMenu");
-    const isLoading = inject("isLoading");
+    const isLoading = ref(true);
 
     const isMobile = inject("isMobile");
 
@@ -27,46 +30,43 @@ export default {
       (artwork) => artwork.name === name.value
     );
 
+    const backgroundImg = ref(require("@/assets/banner-2.jpg"));
+
+    const imagePaths = [backgroundImg.value, currentItem.image];
+
+    const loadImage = (src) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(src);
+      });
+    };
+
+    const loadAllImages = (paths) => {
+      return Promise.all(paths.map((path) => loadImage(path)));
+    };
+
     onMounted(() => {
       isLoading.value = true;
       showMenu.value = false;
-
-      let images = [];
-
-      let loadImages = images.map((image) => {
-        return new Promise((resolve, reject) => {
-          let img = new Image();
-          img.src = image;
-          img.onload = () => resolve(img);
-          img.onerror = reject;
-        });
+      loadAllImages(imagePaths).then(() => {
+        isLoading.value = false;
+        showMenu.value = true;
       });
-
-      Promise.all(loadImages)
-        .then(() => {
-          setTimeout(() => {
-            isLoading.value = false;
-            showMenu.value = true;
-          }, 1500);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     });
 
     return {
       isMobile,
       currentItem,
+      backgroundImg,
     };
   },
 };
 </script>
 
 <template>
-  <div
-    class="header"
-    :style="{ backgroundImage: `url(${require('@/assets/banner-2.jpg')})` }"
-  >
+  <LoaderItem v-if="isLoading" />
+  <div class="header" :style="{ backgroundImage: `url(${backgroundImg})` }">
     <div class="title">
       <div>
         <h1>FLOATING FANTASY</h1>
@@ -74,25 +74,27 @@ export default {
       </div>
     </div>
 
-    <div class="content">
+    <div class="image">
       <img :src="currentItem.image" />
     </div>
   </div>
 
-  <div class="section-title">
-    <h2>{{ currentItem.name }}</h2>
-  </div>
+  <div class="introduction">
+    <div class="section-title">
+      <h2>{{ currentItem.name }}</h2>
+    </div>
 
-  <div class="section-text">
-    <p>{{ currentItem.format }}</p>
-    <p>{{ currentItem.introduction }}</p>
+    <div class="section-text">
+      <p>{{ currentItem.format }}</p>
+      <p v-html="currentItem.introduction"></p>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .header {
   display: flex;
-  padding: 10vh 0 10vh 0;
+  padding: 10vh 0 5vh 0;
   flex-direction: column;
   background: var(--main-color);
 }
@@ -128,31 +130,24 @@ export default {
   margin-right: 10px;
 }
 
-.content {
+.image {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   color: #fff;
   font-size: var(--font-main-size);
-  padding: calc(var(--logo-padding-top) - 10px) 15px 0 15px;
+  padding: calc(var(--logo-padding-top) - 10px) 0 0 0;
 }
 
-.content img {
-  max-width: 50%;
-  max-height: 50vh;
+img {
+  max-width: 90%;
+  max-height: 90vh;
   object-fit: contain;
 }
 
 @media (max-width: 950px) {
-  .content img {
-    max-width: 80%;
-    max-height: 65vh;
-  }
-}
-
-@media (max-width: 500px) {
-  .content img {
+  img {
     max-width: 100%;
     max-height: 80vh;
   }
@@ -182,5 +177,12 @@ export default {
 
 .section-text p {
   font-weight: 300;
+}
+
+.introduction {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

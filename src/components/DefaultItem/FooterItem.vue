@@ -40,7 +40,7 @@ export default {
     <!-- <p>{{ isMobile ? "行動裝置" : "電腦" }}</p> -->
     <div class="menu-items">
       <div class="menu-item" v-for="menu in menus" :key="menu.id">
-        <router-link :to="menu.url" @click="clickMenuItem">
+        <router-link :to="menu.url">
           <h2 class="item-p">{{ menu.name }}</h2>
         </router-link>
       </div>
