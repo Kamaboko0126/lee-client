@@ -142,9 +142,12 @@ i:hover {
   justify-content: center;
   align-items: center;
   transition: width 0.5s ease-in-out;
-  font-size: 18px;
-  font-weight: 800;
   color: #000;
+}
+
+.menu-left span {
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .menu-left span:nth-child(2) {
