@@ -117,21 +117,23 @@ export default {
         <h1>浮 生 幻 景</h1>
       </div>
     </div>
-    <div class="content">
-      <div class="name-content">
-        <div class="motto">
-          <div>
-            <h2>我天天在畫室種草！</h2>
-            <h2>I plant grass in the studio every day!</h2>
+    <div class="content-bg">
+      <div class="content">
+        <div class="img-content">
+          <img :src="artistImg" />
+        </div>
+        <div class="name-content">
+          <div class="motto">
+            <div>
+              <h2>我天天在畫室種草！</h2>
+              <h2>I plant grass in the studio every day!</h2>
+            </div>
+          </div>
+          <div class="name">
+            <p>作者</p>
+            <p>李貞慧 <span>Lee Chen Huei</span></p>
           </div>
         </div>
-        <div class="name">
-          <p>作者</p>
-          <p>李貞慧 <span>Lee Chen Huei</span></p>
-        </div>
-      </div>
-      <div class="img-content">
-        <img :src="artistImg" />
       </div>
     </div>
   </div>
@@ -141,7 +143,7 @@ export default {
 <style scoped>
 .header {
   display: flex;
-  padding: var(--logo-padding-top) 10% var(--logo-padding-top) 0;
+  padding: var(--logo-padding-top) 0 var(--logo-padding-top) 0;
   flex-direction: column;
   background-repeat: no-repeat;
   background-size: cover;
@@ -193,9 +195,16 @@ export default {
   }
 }
 
+.content-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .content {
   display: flex;
   min-height: 50vh;
+  max-width: 1200px;
 }
 
 .name-content {
@@ -209,7 +218,6 @@ export default {
 }
 
 .motto {
-  width: 100%;
   padding: 0 30px;
   height: 100%;
   display: flex;
@@ -250,27 +258,33 @@ export default {
   }
 
   .content {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .name-content,
   .img-content {
     width: 100%;
-    flex-direction: column-reverse;
-    padding: 10vh 0 0 0;
+    flex-direction: column;
+    padding: 5vh 0 0 0;
   }
 
   .name-content {
     align-items: flex-start;
-    padding: 0 30px;
+    padding: 0 36px;
   }
+
   .motto {
-    justify-content: flex-start;
     padding: 0;
   }
 
   .motto,
   .name {
     padding-top: 30px;
+  }
+
+  .motto p,
+  .name p {
+    line-height: normal;
+    margin: 5px 0;
   }
 }
 </style>
