@@ -8,8 +8,9 @@ export default {
     const isMenuOpen = inject("isMenuOpen");
     const isAnimating = ref(false);
     const route = useRoute();
-
     const menus = inject("menus");
+    const disableScroll = inject("disableScroll");
+    const enableScroll = inject("enableScroll");
 
     //click menu icon && setting menu animation
     const clickMenu = () => {
@@ -17,6 +18,11 @@ export default {
         return;
       }
       isAnimating.value = true;
+      if (isMenuOpen.value == false) {
+        disableScroll();
+      } else if (isMenuOpen.value == true) {
+        enableScroll();
+      }
       isMenuOpen.value = !isMenuOpen.value;
       setTimeout(() => {
         isAnimating.value = false;
@@ -95,7 +101,7 @@ i {
   height: 50px;
   font-size: var(--menu-icon-size);
   position: fixed;
-  z-index: 99999;
+  z-index: 999999;
   top: 90px;
   right: var(--menuicon-position-right);
   cursor: pointer;
@@ -117,11 +123,13 @@ i:hover {
   width: 100%;
   height: 100vh;
   position: fixed;
-  z-index: 999;
+  left: 0;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   overflow: auto;
+  z-index: 99999;
 }
 
 .menu-left {

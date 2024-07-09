@@ -14,6 +14,9 @@ export default {
   setup() {
     const showMenu = inject("showMenu");
     const isLoading = ref(true);
+    const disableScroll = inject("disableScroll");
+    const enableScroll = inject("enableScroll");
+
     const stagesData = inject("stagesData");
 
     const route = useRoute();
@@ -22,9 +25,13 @@ export default {
 
     const currentStageData = ref();
 
+    const backgroundImg = ref(require("@/assets/banner-2.jpg"));
+
     // 更新 currentStageData 的函數
     const updateCurrentStageData = () => {
       isLoading.value = true;
+      showMenu.value = false;
+      disableScroll();
       currentStageData.value = stagesData.find(
         (stageData) => stageData.stage === currentStage.value
       );
@@ -49,6 +56,7 @@ export default {
       loadAllImages(imagePaths).then(() => {
         isLoading.value = false;
         showMenu.value = true;
+        enableScroll();
       });
     };
 
@@ -66,11 +74,14 @@ export default {
 
     onMounted(() => {
       showMenu.value = false;
+      isLoading.value = true;
+      disableScroll();
     });
 
     return {
       currentStageData,
       isLoading,
+      backgroundImg,
     };
   },
 };
@@ -78,7 +89,11 @@ export default {
 
 <template>
   <LoaderItem v-if="isLoading" />
-  <div class="body" v-else>
+  <div
+    class="body"
+    v-else
+    :style="{ backgroundImage: `url(${backgroundImg})` }"
+  >
     <div class="title">
       <div>
         <h1>FLOATING FANTASY</h1>

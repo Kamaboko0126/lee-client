@@ -12,6 +12,8 @@ export default {
   setup() {
     const showMenu = inject("showMenu");
     const isLoading = ref(true);
+    const disableScroll = inject("disableScroll");
+    const enableScroll = inject("enableScroll");
 
     const backgroundImg = ref(require("@/assets/1213.png"));
     const bannerImg = ref(require("@/assets/banner.jpg"));
@@ -41,9 +43,11 @@ export default {
 
     onMounted(() => {
       showMenu.value = false;
+      disableScroll();
       loadAllImages(imagePaths).then(() => {
         isLoading.value = false;
         showMenu.value = true;
+        enableScroll();
       });
     });
 
@@ -75,7 +79,7 @@ export default {
             她追逐光影，調皮如精靈玩弄顏料；<br />
             她感悟生命，內觀自省、悠然自得。<br />
             其作品於一筆一畫間完成禪修般的頓悟，<br />
-            自成生命第三境界。(文/游惠遠)
+            自成生命第三境界。 （文/游惠遠）
           </p>
           <router-link to="/artistintroduction" class="button"
             >VIEW ALL</router-link

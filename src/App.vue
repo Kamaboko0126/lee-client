@@ -13,6 +13,18 @@ export default {
   setup() {
     document.title = "李貞慧膠彩藝術";
 
+    const disableScroll = () => {
+      window.addEventListener("wheel", preventScroll, { passive: false });
+    };
+    const enableScroll = () => {
+      window.removeEventListener("wheel", preventScroll, { passive: false });
+    };
+    const preventScroll = (e) => {
+      e.preventDefault();
+    };
+    provide("disableScroll", disableScroll);
+    provide("enableScroll", enableScroll);
+
     //for all pages
     const isMenuOpen = ref(false);
     provide("isMenuOpen", isMenuOpen);

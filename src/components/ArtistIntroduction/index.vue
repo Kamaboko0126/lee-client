@@ -12,6 +12,8 @@ export default {
   setup() {
     const showMenu = inject("showMenu");
     const isLoading = ref(true);
+    const disableScroll = inject("disableScroll");
+    const enableScroll = inject("enableScroll");
 
     const introductionList = [
       {
@@ -87,9 +89,13 @@ export default {
     };
 
     onMounted(() => {
+      isLoading.value = true;
+      showMenu.value = false;
+      disableScroll();
       loadAllImages(imagePaths).then(() => {
         isLoading.value = false;
         showMenu.value = true;
+        enableScroll();
       });
     });
 

@@ -47,7 +47,7 @@ export default {
     </div>
     <div class="infos">
       <div class="copyright">
-        <p>© 2024 Kamaboko Wu. All rights reserved.</p>
+        <p>Copyright © 2024 Lee Chen Huei. Designed and maintained by Kamaboko Wu. All rights reserved.</p>
       </div>
     </div>
   </div>

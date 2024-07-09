@@ -56,7 +56,7 @@ export default {
   padding: 5vh 0;
   box-shadow: 2px 0px 1px #efeeed;
   background: #fff;
-  z-index: 9999999999;
+  z-index: 9999;
 }
 
 .content p {
