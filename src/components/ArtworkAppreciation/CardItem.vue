@@ -49,6 +49,10 @@ export default {
   }
 }
 
+.title h2 {
+  font-weight: 500;
+}
+
 .cards-content {
   width: 100%;
   overflow-x: hidden;

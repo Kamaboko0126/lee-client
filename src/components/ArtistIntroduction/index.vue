@@ -93,9 +93,11 @@ export default {
       showMenu.value = false;
       disableScroll();
       loadAllImages(imagePaths).then(() => {
-        isLoading.value = false;
-        showMenu.value = true;
-        enableScroll();
+        setTimeout(() => {
+          isLoading.value = false;
+          showMenu.value = true;
+          enableScroll();
+        }, 800);
       });
     });
 
@@ -112,10 +114,10 @@ export default {
   <LoaderItem v-if="isLoading" />
   <div class="header" :style="{ backgroundImage: `url(${backgroundImg})` }">
     <div class="title">
-      <div>
+      <router-link to="/">
         <h1>FLOATING FANTASY</h1>
         <h1>浮 生 幻 景</h1>
-      </div>
+      </router-link>
     </div>
     <div class="content-bg">
       <div class="content">
@@ -157,14 +159,15 @@ export default {
   color: #fff;
 }
 
-.title div h1 {
+.title a h1 {
   font-family: "Playfair Display" !important;
   font-weight: 500;
   letter-spacing: 0;
   line-height: normal;
+  color: #fff;
 }
 
-.title div h1:last-child {
+.title a h1:last-child {
   color: #c9a063;
   font-weight: 600;
   letter-spacing: 5px;
@@ -199,6 +202,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5vh;
 }
 
 .content {

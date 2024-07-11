@@ -18,11 +18,13 @@ export default {
   <section class="float">
     <div class="section-content float-content">
       <div class="top">
+        <router-link to="/">
         <div class="logo">
           <h1>FLOATING FANTASY</h1>
           <h1>FLOATING FANTASY</h1>
           <h3>- Eastern Gouache art of Lee Chen-huei -</h3>
         </div>
+        </router-link>
       </div>
       <div class="bottom">
         <p class="rotated-text">Eastern Gouache art of Lee Chen-huei</p>

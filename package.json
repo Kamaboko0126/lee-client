@@ -12,7 +12,6 @@
     "@vueuse/core": "^10.9.0",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
-    "vue-meta": "^3.0.0-alpha.2",
     "vue-router": "^4.2.5",
     "yarn": "^1.22.22"
   },

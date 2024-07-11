@@ -5,10 +5,12 @@ export default {
   name: "ArtworkAppreciation",
   components: {},
   setup() {
+    const enableScroll = inject("enableScroll");
+
     const newsData = [
       {
         date: "2024.07.11 - 2024.09.02",
-        value: "微光心影—李貞慧膠彩創作",
+        value: "微光心影—李貞慧膠彩創作 (查看詳情)",
         url: "https://www.artspots-taichung.com.tw/tw/news-detail/163",
       },
       {
@@ -21,17 +23,17 @@ export default {
       },
       {
         date: "2022.10.15 - 2022.12.15",
-        value: "生成",
+        value: "生成 (查看詳情)",
         url: "https://ymspring.com.tw/2142/art-gallery/%E5%B1%95%E8%A6%BD%E4%B8%BB%E9%A1%8C%E3%80%90%E7%94%9F%E6%88%90%E3%80%91/",
       },
       {
         date: "2022.03.31 - 2022.05.01",
-        value: "時‧光景—李貞慧創作個展",
+        value: "時‧光景—李貞慧創作個展 (查看詳情)",
         url: "https://imedia.culture.tw/channel/chcsec/zh_tw/media/131368",
       },
       {
         date: "2006.04.20 - 2006.05.25",
-        value: "天地優遊—李貞慧膠彩個展",
+        value: "天地優遊—李貞慧膠彩個展 (查看詳情)",
         url: "http://art.lib.pu.edu.tw/2006-04-20/index.htm",
       },
     ];
@@ -39,6 +41,7 @@ export default {
     onMounted(() => {
       const showMenu = inject("showMenu");
       showMenu.value = true;
+      enableScroll();
     });
 
     return {
@@ -51,10 +54,10 @@ export default {
 <template>
   <div class="header">
     <div class="title">
-      <div>
+      <router-link to="/">
         <h1>FLOATING FANTASY</h1>
         <h1>浮 生 幻 景</h1>
-      </div>
+      </router-link>
     </div>
   </div>
   <div class="second-title">
@@ -88,14 +91,15 @@ export default {
   color: #fff;
 }
 
-.title div h1 {
+.title a h1 {
   font-family: "Playfair Display" !important;
   font-weight: 500;
   letter-spacing: 0;
   line-height: normal;
+  color: #fff;
 }
 
-.title div h1:last-child {
+.title a h1:last-child {
   color: #c9a063;
   font-weight: 600;
   letter-spacing: 5px;

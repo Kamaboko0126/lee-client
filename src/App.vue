@@ -3,6 +3,7 @@ import { ref, provide } from "vue";
 import MenuItem from "./components/DefaultItem/MenuItem.vue";
 import FooterItem from "./components/DefaultItem/FooterItem.vue";
 import LeftItem from "./components/DefaultItem/LeftItem.vue";
+
 export default {
   name: "App",
   components: {
@@ -11,8 +12,6 @@ export default {
     LeftItem,
   },
   setup() {
-    document.title = "李貞慧膠彩藝術";
-
     const disableScroll = () => {
       window.addEventListener("wheel", preventScroll, { passive: false });
     };
@@ -282,6 +281,11 @@ export default {
   }
 }
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 p,
 h1,
 h2,
@@ -343,9 +347,5 @@ button {
   font: inherit;
   cursor: pointer;
   outline: inherit;
-}
-
-a {
-  text-decoration: none;
 }
 </style>

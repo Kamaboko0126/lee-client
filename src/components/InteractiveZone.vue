@@ -5,10 +5,12 @@ import { useClipboard } from "@vueuse/core";
 export default {
   setup() {
     const isMobile = inject("isMobile");
+    const enableScroll = inject("enableScroll");
 
     onMounted(() => {
       const showMenu = inject("showMenu");
       showMenu.value = true;
+      enableScroll();
     });
 
     const copied = reactive({});
@@ -36,10 +38,10 @@ export default {
 <template>
   <div class="header">
     <div class="title">
-      <div>
+      <router-link to="/">
         <h1>FLOATING FANTASY</h1>
         <h1>浮 生 幻 景</h1>
-      </div>
+      </router-link>
     </div>
   </div>
 
@@ -98,14 +100,15 @@ export default {
   color: #fff;
 }
 
-.title div h1 {
+.title a h1 {
   font-family: "Playfair Display" !important;
   font-weight: 500;
   letter-spacing: 0;
   line-height: normal;
+  color: #fff;
 }
 
-.title div h1:last-child {
+.title a h1:last-child {
   color: #c9a063;
   font-weight: 600;
   letter-spacing: 5px;
@@ -240,7 +243,7 @@ h2 {
 
     .letter-text span,
     .letter-text p {
-      color: #cb5a5e;
+      color: #575757;
       font-weight: 500;
     }
 

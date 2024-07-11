@@ -71,9 +71,11 @@ export default {
     </div>
     <div class="menu-right">
       <div class="logo">
-        <h1>FLOATING FANTASY</h1>
-        <h1>FLOATING FANTASY</h1>
-        <h3>- Eastern Gouache art of Lee Chen-huei -</h3>
+        <router-link to="/" @click="clickMenuItem">
+          <h1>FLOATING FANTASY</h1>
+          <h1>FLOATING FANTASY</h1>
+          <h3>- Eastern Gouache art of Lee Chen-huei -</h3>
+        </router-link>
       </div>
       <div class="menu-items">
         <div class="menu-item" v-for="menu in menus" :key="menu.id">

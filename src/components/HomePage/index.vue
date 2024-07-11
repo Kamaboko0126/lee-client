@@ -45,9 +45,11 @@ export default {
       showMenu.value = false;
       disableScroll();
       loadAllImages(imagePaths).then(() => {
-        isLoading.value = false;
-        showMenu.value = true;
-        enableScroll();
+        setTimeout(() => {
+          isLoading.value = false;
+          showMenu.value = true;
+          enableScroll();
+        }, 800);
       });
     });
 
